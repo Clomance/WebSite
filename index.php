@@ -28,6 +28,14 @@
         width:110px;
     }
 
+    gifimg{
+        position:relative;
+        border-radius:8px;
+        border:solid;
+        height:110px;
+        width:110px;
+    }
+
     body{
         background-color:lightblue;
         margin:0;
@@ -39,6 +47,8 @@
     <header>
         <img src="https://sun1.ufanet.userapi.com/svOT89nbDylVnfW8jScgP5LexI5KVoqa7Qhrow/o_rkxsJDupg.jpg">
         <text>ПИ-318 - лучшая группа!</text>
+
+        <img src="minasov.gif">
     </header>
 
     <ul id="nav">
@@ -49,7 +59,3 @@
         <li><a href="Khismatullin">Хисматуллин О.М.</a>
     </ul>
 </html>
-
-
-
-
