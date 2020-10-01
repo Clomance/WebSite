@@ -58,6 +58,6 @@
 
         <li><a href="Khismatullin">Хисматуллин О.М.</a>
             
-        <li><a href="Khismatullin">Шайхинуров Т.А.</a>
+        <li><a href="Shaykhinurov">Шайхинуров Т.А.</a>
     </ul>
 </html>
