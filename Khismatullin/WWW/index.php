@@ -14,7 +14,7 @@
     <li><a href="lab_2_2.php">lab_2_2</a>
     <li><a href="lab_2_3.php">lab_2_3</a>
     <li><a href="lab_2_4.php">lab_2_4</a>
-    <li><a href="lab_2_5.php">lab_2_4</a>
+    <li><a href="lab_2_5.php">lab_2_5</a>
     <li><a href="lab_2_6.php">lab_2_6</a>
     <li><a href="lab_2_7.php">lab_2_7</a>
     <li><a href="lab_2_8.php">lab_2_8</a>
