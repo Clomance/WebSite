@@ -40,7 +40,7 @@
         background-image: url("1338380.jpg");
  background-color: #cccccc;
         background-repeat: no-repeat;
-  background-size: auto;
+  background-size: 1920px 1080px;;
         margin:0;
         padding:0;
     }
