@@ -54,12 +54,12 @@
     </header>
 
     <ul id="nav">
-        <li><a href="https://pialikin.herokuapp.com">Аликин В.П.</a>
+        <li><a style="color: white" href="https://pialikin.herokuapp.com">Аликин В.П.</a>
         
-        <li><a href="https://cPHPShaikhinurorocodev.herokuapp.com/">Разяпов Э.В.</a>
+        <li><a style="color: white" href="https://cPHPShaikhinurorocodev.herokuapp.com/">Разяпов Э.В.</a>
 
-        <li><a href="Khismatullin">Хисматуллин О.М.</a>
+        <li><a style="color: white" href="Khismatullin">Хисматуллин О.М.</a>
             
-        <li><a href="PHPShaikhinurov">Шайхинуров Т.А.</a>
+        <li><a style="color: white" href="PHPShaikhinurov">Шайхинуров Т.А.</a>
     </ul>
 </html>
