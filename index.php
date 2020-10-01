@@ -57,5 +57,7 @@
         <li><a href="https://crocodev.herokuapp.com/">Разяпов Э.В.</a>
 
         <li><a href="Khismatullin">Хисматуллин О.М.</a>
+            
+        <li><a href="Khismatullin">Шайхинуров Т.А.</a>
     </ul>
 </html>
