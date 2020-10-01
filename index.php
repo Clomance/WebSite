@@ -37,7 +37,9 @@
     }
 
     body{
-        background-color:lightblue;
+        background-image: url("1338380.jpg");
+        background-repeat: no-repeat;
+        background-size: 100%;
         margin:0;
         padding:0;
     }
