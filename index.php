@@ -37,7 +37,8 @@
     }
 
     body{
-        background-color:lightblue;
+        background-image: url("1338380.jpg");
+ background-color: #cccccc;
         margin:0;
         padding:0;
     }
