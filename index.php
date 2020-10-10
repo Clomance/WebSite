@@ -28,14 +28,6 @@
         width:110px;
     }
 
-    gifimg{
-        position:relative;
-        border-radius:8px;
-        border:solid;
-        height:110px;
-        width:110px;
-    }
-
     body{
         background-image: url("1338380.jpg");
         background-repeat: no-repeat;
@@ -55,11 +47,9 @@
 
     <ul id="nav">
         <li><a style="color: white" href="https://pialikin.herokuapp.com">Аликин В.П.</a>
-        
+
         <li><a style="color: white" href="https://crocodev.herokuapp.com/">Разяпов Э.В.</a>
 
         <li><a style="color: white" href="Khismatullin">Хисматуллин О.М.</a>
-            
-        <li><a style="color: white" href="PHPShaikhinurov">Шайхинуров Т.А.</a>
     </ul>
 </html>
