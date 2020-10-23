@@ -11,8 +11,8 @@
             $a = ["оскар", "кломанс", "мартин", "admin"];
 
             $passed = false;
-            echo "Проверка: ";
             if (isset($_POST["obr"])){
+                echo "Проверка: ";
                 $user_name = mb_strtolower(trim($_POST["userName"]),"UTF-8");
 
                 for ($c = 0; $c < count($a); $c++){
