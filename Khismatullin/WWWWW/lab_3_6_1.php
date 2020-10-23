@@ -13,7 +13,7 @@
                 $word = trim($_POST["word"]);
                 // Мне было лень делать только для удаления слов,
                 // так что здесь ещё и удаление всех совпадающих символов
-                $sentence = mb_eregi_replace($word,"",$sentence);
+                $sentence = mb_eregi_replace($word,"",$sentence,"UTF-8");
 
                 echo $sentence;
             }
