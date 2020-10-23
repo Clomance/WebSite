@@ -1,5 +1,6 @@
 <HTML>
     <BODY>
+    <meta charset = "UTF-8">
         <H1> Проверка логина: </H1>
         <FORM action="<?php print $PHP_SELF ?>" method="post">
             Ваше имя:
