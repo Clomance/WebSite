@@ -13,7 +13,10 @@
             $passed = false;
             if (isset($_POST["obr"])){
                 echo "Проверка: ";
+
                 $user_name = mb_strtolower(trim($_POST["userName"]),"UTF-8");
+
+                echo "err";
 
                 echo $_POST["userName"];
 
