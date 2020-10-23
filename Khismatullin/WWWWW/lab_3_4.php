@@ -1,7 +1,7 @@
 <HTML>
     <BODY>
-        <H1> Проверяем метод GET: </H1>
-        <FORM action="<?php print $PHP_SELF ?>" method="post">
+        <H1> Проверка логина: </H1>
+        <FORM action="<?php print $PHP_SELF ?>" method="get">
             Ваше имя:
             <INPUT type="text" name="userName" maxlength="40">
             <INPUT type="submit" name="obr" value="Проверить">
@@ -12,8 +12,8 @@
 
             $passed = false;
             echo "Проверка: ";
-            if (isset($_POST["obr"])){
-                $user_name = mb_strtolower(trim($_POST["userName"]));
+            if (isset($_GET["obr"])){
+                $user_name = mb_strtolower(trim($_GET["userName"]));
 
                 for ($c = 0; $c < count($a); $c++){
                     if ($user_name == $a[$c]){
