@@ -15,6 +15,8 @@
                 echo "Проверка: ";
                 $user_name = mb_strtolower(trim($_POST["userName"]),"UTF-8");
 
+                echo $user_name;
+
                 for ($c = 0; $c < count($a); $c++){
                     if ($user_name == $a[$c]){
                         echo "Здравствуйте, $a[$c]!";
