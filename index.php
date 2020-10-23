@@ -46,10 +46,6 @@
     </header>
 
     <ul id="nav">
-        <li><a style="color: white" href="https://pialikin.herokuapp.com">Аликин В.П.</a>
-
-        <li><a style="color: white" href="https://crocodev.herokuapp.com/">Разяпов Э.В.</a>
-
         <li><a style="color: white" href="Khismatullin">Хисматуллин О.М.</a>
     </ul>
 </html>
