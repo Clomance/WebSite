@@ -9,11 +9,11 @@
         </FORM>
 
         <?php
-            $a = ["оскар", "кломанс", "мартин", "admin"];
+            $a = ["Оскар", "Стас", "Мартин", "admin"];
 
             $passed = false;
             if (isset($_POST["obr"])){
-                $user_name = mb_strtolower(trim($_POST["userName"]),"UTF-8");
+                $user_name = trim($_POST["userName"]);
 
                 for ($c = 0; $c < count($a); $c++){
                     if ($user_name == $a[$c]){
