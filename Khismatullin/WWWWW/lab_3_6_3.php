@@ -17,12 +17,12 @@
                     return;
                 }
 
-                $words = mb_split(" ", $sentence,"UTF-8");
+                $words = explode(" ", $sentence);
 
                 $counter = 0;
 
                 for ($c = 0; $c < count($words); $c++){
-                    if (mb_stripos($words[$c], $letter,"UTF-8") === 0){
+                    if (strpos($words[$c], $letter) === 0){
                         $counter++;
                     }
                 }
