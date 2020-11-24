@@ -3,24 +3,22 @@
     if ($mysqli->connect_errno) {
         echo "Не удалось подключиться к БД";
     }
-    // Строка запроса на добавление записи в таблицу:
-    $sql_add = "INSERT INTO user SET login='" . $_GET['login'].
-        "', name='" . $_GET['name'].
-        "', password='" . $_GET['password'].
-        "', email='" . $_GET['email'].
-        "', info='" . $_GET['info'] . "'";
+
+    $login = $_GET['login'];
+    $name = $_GET['name'];
+    $password = $_GET['password'];
+    $email = $_GET['email'];
+    $info = $_GET['info'];
 
     // Выполнение запроса
-    $result = $mysqli->query($sql_add);
+    $result = $mysqli->query("INSERT INTO user SET login='$login', name='$name', password='$password', email='$email', info='$info'");
 
     // если нет ошибок при выполнении запроса
     if ($result){
         print "<p>Спасибо, вы зарегистрированы в базе данных.";
-        print "<p><a href='index.php'> Вернуться к списку
-        пользователей </a>";
+        print "<p><a href='index.php'> Вернуться к списку пользователей </a>";
     }
     else{
-        print "Ошибка сохранения. <a href=\"index.php\">
-        Вернуться к списку книг </a>";
+        print "Ошибка сохранения. <a href='index.php'> Вернуться к списку книг </a>";
     }
 ?>

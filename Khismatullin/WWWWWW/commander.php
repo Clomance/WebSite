@@ -10,8 +10,9 @@
     <body>
         <form action="<?php print $PHP_SELF ?>" method="post">
             Выполнить команду: 
-            <INPUT type="text" name="command" maxlength="80">
-            <INPUT type="submit" name="send" value="Выполнить">
+            
+            <textarea name="command" rows="8" cols="64" width="512"></textarea>
+            <input type="submit" name="send" value="Выполнить">
         </form>
 
         <?php

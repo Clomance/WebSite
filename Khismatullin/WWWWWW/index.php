@@ -30,25 +30,28 @@
         </tr>
         <?php
             // Запрос на выборку сведений о пользователях
-            $result = $mysqli->query("SELECT name, email FROM user");
+            $result = $mysqli->query("SELECT login, name, email FROM user");
 
             if ($result){
+                $counter=0;
                 // Для каждой строки из запроса
                 while ($row = $result->fetch_array()){
+                    $login = $row['login'];
+                    $name = $row['name'];
+                    $email = $row['email'];
+
+                    $counter++;
+
                     echo "<tr>";
-                    echo "<td>" . $row['name'] . "</td>";
-                    echo "<td>" . $row['email'] . "</td>";
-                    echo "<td><a href='edit.php?id=" . $row['id']
-                    . "'>Редактировать</a></td>"; // запуск скрипта для редактирования
-                    echo "<td><a href='delete.php?id=" . $row['id']
-                    . "'>Удалить</a></td>"; // запуск скрипта для удаления записи
+                    echo "<td>$name</td><td>$email</td>";
+                    echo "<td><a href='edit.php?login=$login'>Редактировать</a></td>";
+                    echo "<td><a href='delete.php?login=$login'>Удалить</a></td>";
                     echo "</tr>";
                 }
                 print "</table>";
-                // $num_rows = $result->num_rows(); // число записей в таблице БД
-                // print("<P>Всего пользователей: $num_rows </p>");
+                print("<p>Всего пользователей: $counter </p>");
             }
+
+            print("<p> <a href='new.php'> Добавить пользователя </a> </p>");
         ?>
-    <p> <a href="new.php"> Добавить пользователя </a>
-    
 </html>
