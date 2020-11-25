@@ -8,6 +8,6 @@
 
     $result = $mysqli->query("DELETE FROM games WHERE id='$id'");
 
-    header("Location: index.php");
+    header("Location: games.php");
     exit;
 ?>

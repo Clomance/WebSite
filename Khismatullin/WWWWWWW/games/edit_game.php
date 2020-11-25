@@ -30,7 +30,7 @@
             print "<input type='hidden' name='id' size='30' value='$id'>";
             print "<input type='submit' name='save' value='Сохранить'>";
             print "</form>";
-            print "<p><a href='index.php'> Вернуться к списку планет </a>";
+            print "<p><a href='games.php'> Вернуться к списку планет </a>";
         ?>
     </body>
 </html>
