@@ -1,5 +1,5 @@
 <html>
-    <head> <title> Редактирование данных о пользователе </title> </head>
+    <head> <title> Редактирование данных о планете </title> </head>
     <body>
         <?php
             $mysqli = new mysqli("eu-cdbr-west-03.cleardb.net", "be979b4b739385", "67d2bc8a", "heroku_59a01e27452dafc");
@@ -7,29 +7,29 @@
                 echo "Не удалось подключиться к БД";
             }
 
-            $login = $_GET['login'];
+            $name = $_GET['name'];
 
-            $result = $mysqli->query("SELECT name, password, email, info FROM user WHERE login='$login'");
+            $result = $mysqli->query("SELECT constellation, type, distance, diameter FROM planets WHERE name='$name'");
 
             if ($result){
                 while ($st = $result->fetch_array()) {
-                    $name = $st['name'];
-                    $password = $st['password'];
-                    $email = $st['email'];
-                    $info = $st['info'];
+                    $constellation = $st['constellation'];
+                    $distance = $st['distance'];
+                    $type = $st['type'];
+                    $diameter = $st['diameter'];
                 }
             }
 
             print "<form action='save_edit.php' metod='get'>";
-            print "Имя: <input name='name' size='50' type='text' value='$name'>";
-            print "<br>Логин: <input name='new_login' size='20' type='text' value='$login'>";
-            print "<br>Пароль: <input name='password' size='20' type='text' value='$password'>";
-            print "<br>Е-mail: <input name='email' size='30' type='text' value='$email'>";
-            print "<br>Информация: <textarea name='info' rows='4' cols='40'>$info</textarea>";
-            print "<input type='hidden' name='login' size='30' value='$login'>";
-            print "<input type='submit' name='' value='Сохранить'>";
+            print "Название: <input name='new_name' size='50' type='text' value='$name'>";
+            print "<br>Созвездие: <input name='constellation' size='20' type='text' value='$constellation'>";
+            print "<br>Расстояние до Земли: <input name='distance' size='20' type='text' value='$distance'>";
+            print "<br>Тип: <input name='type' size='30' type='text' value='$type'>";
+            print "<br>Диаметр: <input type='text' name='diameter' size='20' value='$diameter'>";
+            print "<input type='hidden' name='name' size='30' value='$name'>";
+            print "<input type='submit' name='save' value='Сохранить'>";
             print "</form>";
-            print "<p><a href='index.php'> Вернуться к списку пользователей </a>";
+            print "<p><a href='index.php'> Вернуться к списку планет </a>";
         ?>
     </body>
 </html>

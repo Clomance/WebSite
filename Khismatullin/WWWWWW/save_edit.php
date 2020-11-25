@@ -6,23 +6,23 @@
                 echo "Не удалось подключиться к БД";
             }
 
-            $old_login = $_GET['login'];
+            $old_name = $_GET['name'];
 
-            $new_login = $_GET['new_login'];
-            $name = $_GET['name'];
-            $password = $_GET['password'];
-            $email = $_GET['email'];
-            $info = $_GET['info'];
+            $new_name = $_GET['new_name'];
+            $constellation = $_GET['constellation'];
+            $distance = $_GET['distance'];
+            $type = $_GET['type'];
+            $diameter = $_GET['diameter'];
 
-            $zapros="UPDATE user SET login='$new_login', name='$name', password='$password', email='$email', info='$info' WHERE login='$old_login'";
+            $zapros="UPDATE planets SET name='$new_name', constellation='$constellation', distance='$distance', type='$type', diameter='$diameter' WHERE name='$old_name'";
 
             $result = $mysqli->query($zapros);
 
             if ($result) {
-                echo 'Все сохранено. <a href="index.php"> Вернуться к списку пользователей </a>';
+                echo 'Все сохранено. <a href="index.php"> Вернуться к списку планет </a>';
             }
             else { 
-                echo 'Ошибка сохранения. <a href="index.php"> Вернуться к списку пользователей</a> '; 
+                echo 'Ошибка сохранения. <a href="index.php"> Вернуться к списку планет</a> '; 
             }
         ?>
     </body>

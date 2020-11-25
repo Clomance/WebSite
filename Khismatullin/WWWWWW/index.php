@@ -1,57 +1,49 @@
-<p> Дата и время:
-<p>
-<?php
-    $d=date("d.m.Y H:i");
-    echo($d);
-?>
-<ul id="nav">
+<h2>Управление БД</h2>
+<ul id="nav"> <!-- Собственные скрипты для просмотра и редактирования БД -->
     <li><a href="commander.php">Коммандер для БД</a>
     <li><a href="bd_edit.php">Редактирование БД</a>
 </ul>
 
 <html>
     <head> <title> Сведения о прользователях сайта </title> </head>
-    <body>
+
+    <h2>Список планет:</h2>
+    <table border="1">
+        <tr>
+            <th> Название </th> <th> Созвездие </th> <th> Расстояние до Земли </th>
+            <th> Тип </th> <th> Диаметр </th> <th> Редактировать </th> <th> Уничтожить </th>
+        </tr>
         <?php
             $mysqli = new mysqli("eu-cdbr-west-03.cleardb.net", "be979b4b739385", "67d2bc8a", "heroku_59a01e27452dafc");
             if ($mysqli->connect_errno) {
                 echo "Не удалось подключиться к БД";
             }
-        ?>
-    </body>
 
-    <h2>Зарегистрированные пользователи:</h2>
-    <table border="1">
-        <tr>
-            <th> Имя </th>
-            <th> E-mail </th>
-            <th> Редактировать </th>
-            <th> Уничтожить </th>
-        </tr>
-        <?php
             // Запрос на выборку сведений о пользователях
-            $result = $mysqli->query("SELECT login, name, email FROM user");
+            $result = $mysqli->query("SELECT name, constellation, distance, type, diameter FROM planets");
 
             if ($result){
                 $counter=0;
                 // Для каждой строки из запроса
                 while ($row = $result->fetch_array()){
-                    $login = $row['login'];
                     $name = $row['name'];
-                    $email = $row['email'];
+                    $constellation = $row['constellation'];
+                    $distance = $row['distance'];
+                    $type = $row['type'];
+                    $diameter = $row['diameter'];
 
                     $counter++;
 
                     echo "<tr>";
-                    echo "<td>$name</td><td>$email</td>";
-                    echo "<td><a href='edit.php?login=$login'>Редактировать</a></td>";
-                    echo "<td><a href='delete.php?login=$login'>Удалить</a></td>";
+                    echo "<td>$name</td><td>$constellation</td><td>$distance</td><td>$type</td><td>$diameter</td>";
+                    echo "<td><a href='edit.php?name=$name'>Редактировать</a></td>";
+                    echo "<td><a href='delete.php?name=$name'>Удалить</a></td>";
                     echo "</tr>";
                 }
                 print "</table>";
-                print("<p>Всего пользователей: $counter </p>");
+                print("<p>Всего планет: $counter </p>");
             }
 
-            print("<p> <a href='new.php'> Добавить пользователя </a> </p>");
+            print("<p> <a href='new.php'> Добавить планету </a> </p>");
         ?>
 </html>

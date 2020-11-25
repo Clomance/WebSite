@@ -4,21 +4,21 @@
         echo "Не удалось подключиться к БД";
     }
 
-    $login = $_GET['login'];
     $name = $_GET['name'];
-    $password = $_GET['password'];
-    $email = $_GET['email'];
-    $info = $_GET['info'];
+    $constellation = $_GET['constellation'];
+    $distance = $_GET['distance'];
+    $type = $_GET['type'];
+    $diameter = $_GET['diameter'];
 
     // Выполнение запроса
-    $result = $mysqli->query("INSERT INTO user SET login='$login', name='$name', password='$password', email='$email', info='$info'");
+    $result = $mysqli->query("INSERT INTO planets SET name='$name', constellation='$constellation', distance='$distance', type='$type',  diameter ='$diameter'");
 
     // если нет ошибок при выполнении запроса
     if ($result){
-        print "<p>Спасибо, вы зарегистрированы в базе данных.";
-        print "<p><a href='index.php'> Вернуться к списку пользователей </a>";
+        print "<p>Вы успешно внесли планету в базе данных.";
+        print "<p><a href='index.php'> Вернуться к списку планет </a>";
     }
     else{
-        print "Ошибка сохранения. <a href='index.php'> Вернуться к списку книг </a>";
+        print "Ошибка сохранения. <a href='index.php'> Вернуться к списку планет </a>";
     }
 ?>
