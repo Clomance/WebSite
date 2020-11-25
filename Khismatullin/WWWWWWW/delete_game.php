@@ -4,9 +4,9 @@
         echo "Не удалось подключиться к БД";
     }
 
-    $name = $_GET['name'];
+    $id = $_GET['id'];
 
-    $result = $mysqli->query("DELETE FROM planets WHERE name='$name'");
+    $result = $mysqli->query("DELETE FROM games WHERE id='$id'");
 
     header("Location: index.php");
     exit;

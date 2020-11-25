@@ -3,7 +3,15 @@
     <h2> Таблицы </h2>
     <table border = '1' >
         <tr>
-            <th> Таблицы </th> <th> Поля </th> <th> Типы </th> <th> Редактировать </th> <th> Удалить </th>
+            <th>Таблицы</th>
+            <th>Поля</th>
+            <th>Типы</th>
+            <th>Null</th>
+            <th>Ключи</th>
+            <th>По умочанию</th>
+            <th>Дополнительно</th>
+            <th>Редактировать</th>
+            <th>Удалить</th>
         </tr>
         <?php
             $mysqli = new mysqli("eu-cdbr-west-03.cleardb.net", "be979b4b739385", "67d2bc8a", "heroku_59a01e27452dafc");
@@ -17,7 +25,7 @@
                 while ($row = $result_tables->fetch_array()){
                     $table_name = $row[0];
 
-                    echo "<tr> <th>$table_name</th> <th></th> <th></th> <th></th> <th></th> </tr>";
+                    echo "<tr> <th>$table_name</th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> </tr>";
 
                     $result_columns = $mysqli->query("SHOW COLUMNS FROM $table_name");
 
@@ -25,7 +33,12 @@
                         while($row = $result_columns->fetch_assoc()){
                             $field = $row['Field'];
                             $type = $row['Type'];
-                            echo "<tr> <th></th> <th>$field</th> <th>$type</th> <th></th> <th></th> </tr> ";
+                            $null = $row['Null'];
+                            $key = $row['Key'];
+                            $default = $row['Default'];
+                            $extra = $row['Extra'];
+
+                            echo "<tr> <th></th> <th>$field</th> <th>$type</th> <th>$null</th> <th>$key</th> <th>$default</th> <th>$extra</th> <th></th> <th></th> </tr> ";
                         }
                     }
                 }
