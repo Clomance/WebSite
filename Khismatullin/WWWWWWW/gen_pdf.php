@@ -93,9 +93,19 @@
 
     $file_data = $pdf->Output("S");
 
-    fopen("Games.pdf","w+");
+    $length = strlen($file_data);
 
-    file_put_contents("Games.pdf",$file_data);
+    header('Content-Description: File Transfer');
+    header('Content-Type: text/plain');
+    header('Content-Disposition: attachment; filename=Games.pdf');
+    header('Content-Transfer-Encoding: binary');
+    header('Content-Length: ' . $length);
+    header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+    header('Expires: 0');
+    header('Pragma: public');
 
-    header("Location: index.php");
+    echo $file_data;
+    exit;
+
+    //header("Location: index.php");
 ?>
