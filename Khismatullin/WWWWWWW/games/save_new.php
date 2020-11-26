@@ -4,7 +4,6 @@
         echo "Не удалось подключиться к БД";
     }
 
-    $id = $_GET['id'];
     $name = $_GET['name'];
     $genre = $_GET['genre'];
     $developer = $_GET['developer'];
@@ -12,15 +11,15 @@
     $sold = $_GET['sold'];
 
     // Выполнение запроса
-    $result = $mysqli->query("INSERT INTO games SET id='$id', name='$name', genre='$genre', developer='$developer', publisher='$publisher',  sold ='$sold'");
+    $result = $mysqli->query("INSERT INTO games SET name='$name', genre='$genre', developer='$developer', publisher='$publisher', sold ='$sold'");
 
     // если нет ошибок при выполнении запроса
     if ($result){
-        print "<p>Вы успешно внесли игру в базе данных.";
+        print "<p>Вы успешно внесли игру в базу данных.";
     }
     else{
-        print "Ошибка сохранения.";
+        print "<p>Ошибка сохранения.";
     }
 
-    print "<p><a href='index.php'> Вернуться к списку игр </a>";
+    print "<p><a href='games.php'> Вернуться к списку игр </a>";
 ?>

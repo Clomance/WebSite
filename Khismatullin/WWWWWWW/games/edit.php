@@ -10,21 +10,28 @@
 
                 $id = $_GET['id'];
 
-                $result = $mysqli->query("SELECT name, url FROM stores WHERE id='$id'");
+                $result = $mysqli->query("SELECT name, genre, developer, publisher, sold FROM games WHERE id='$id'");
 
                 if ($result){
                     while ($st = $result->fetch_array()) {
                         $name = $st['name'];
-                        $url = $st['url'];
+                        $genre = $st['genre'];
+                        $developer = $st['developer'];
+                        $publisher = $st['publisher'];
+                        $sold = $st['sold'];
                     }
                 }
 
                 print "Название: <input name='name' size='50' type='text' value='$name'>";
-                print "<br>URL: <input name='url' size='20' type='text' value='$url'>";
+                print "<br>Жанр: <input name='genre' size='20' type='text' value='$genre'>";
+                print "<br>Разработчик: <input name='developer' size='20' type='text' value='$developer'>";
+                print "<br>Издатель: <input name='publisher' size='30' type='text' value='$publisher'>";
+                print "<br>Продано: <input type='text' name='sold' size='20' value='$sold'>";
                 print "<input type='hidden' name='id' size='30' value='$id'>";
             ?>
+
             <p><input type='submit' name='save' value='Сохранить'></p>
-            <p><a href='stores.php'> Вернуться к списку магазинов </a>
         </form>
+        <p><a href='games.php'> Вернуться к списку планет </a>
     </body>
 </html>

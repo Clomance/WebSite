@@ -36,6 +36,8 @@
                 print("<p>Всего магазинов: $counter </p>");
             }
 
-            print("<p> <a href='new.php?id=$counter'> Добавить магазин </a> </p>");
+            print("<p> <a href='new.php'> Добавить магазин </a> </p>");
         ?>
+
+        <p> <a href='../index.php'> Вернуться в меню </a> </p>
 </html>

@@ -6,6 +6,9 @@
 
     $id = $_GET['id'];
 
+    // Удаление ключей этой игры
+    $result = $mysqli->query("DELETE FROM game_keys WHERE game_id='$id'");
+    // Удаление самой игры
     $result = $mysqli->query("DELETE FROM games WHERE id='$id'");
 
     header("Location: games.php");

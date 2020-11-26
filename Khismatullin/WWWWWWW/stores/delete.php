@@ -5,7 +5,9 @@
     }
 
     $id = $_GET['id'];
-
+    // Удаление ключей из этого магазина
+    $result = $mysqli->query("DELETE FROM game_keys WHERE store_id='$id'");
+    // Удаление самого магазина
     $result = $mysqli->query("DELETE FROM stores WHERE id='$id'");
 
     header("Location: stores.php");

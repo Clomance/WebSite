@@ -1,7 +1,7 @@
 <html>
     <head> <title> Сведения </title> </head>
 
-    <h2>Управление БД</h2>
+    <h2> Управление БД </h2>
     <ul id="bd"> <!-- Собственные скрипты для просмотра и редактирования БД -->
         <li><a href="../DataBase/commander.php">Коммандер для БД</a>
         <li><a href="../DataBase/bd_edit.php">Редактирование БД</a>
@@ -24,5 +24,6 @@
     <ul id="nav"> <!-- Собственные скрипты для просмотра и редактирования БД -->
         <li><a href="games/games.php">Игры</a>
         <li><a href="stores/stores.php">Магазины игр</a>
+        <li><a href="game_keys/game_keys.php">Ключи игр</a>
     </ul>
 </html>

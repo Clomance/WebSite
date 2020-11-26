@@ -31,14 +31,16 @@
 
                     echo "<tr>";
                     echo "<td>$name</td><td>$genre</td><td>$developer</td><td>$publisher</td><td>$sold</td>";
-                    echo "<td><a href='edit_game.php?id=$id'>Редактировать</a></td>";
-                    echo "<td><a href='delete_game.php?id=$id'>Удалить</a></td>";
+                    echo "<td><a href='edit.php?id=$id'>Редактировать</a></td>";
+                    echo "<td><a href='delete.php?id=$id'>Удалить</a></td>";
                     echo "</tr>";
                 }
                 print "</table>";
                 print("<p>Всего игр: $counter </p>");
             }
 
-            print("<p> <a href='new_game.php?id=$counter'> Добавить игру </a> </p>");
+            print("<p> <a href='new.php'> Добавить игру </a> </p>");
         ?>
+
+        <p> <a href='../index.php'> Вернуться в меню </a> </p>
 </html>
