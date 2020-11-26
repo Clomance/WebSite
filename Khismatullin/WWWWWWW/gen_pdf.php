@@ -36,7 +36,7 @@
         LEFT JOIN stores ON game_keys.store_id=stores.id"
     );
 
-    $w = array(6,30,24,24,24,24,20,17,24);
+    $w = array(6,30,25,25,25,20,20,17,25);
     $h = 10;
 
     $pdf->SetFillColor(200,200,200);
@@ -91,5 +91,5 @@
         }
     }
 
-    $pdf->Output();
+    $pdf->Output("D","Games.pdf",true);
 ?>
