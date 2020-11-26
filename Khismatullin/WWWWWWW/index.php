@@ -30,5 +30,6 @@
         <li><a href="game_keys/game_keys.php">Ключи игр</a>
     </ul>
 
-    <button onclick="window.location.href='gen_pdf.php'">PDF-версия таблицы игр</button>
+    <button onclick="window.location.href='Games.pdf'">PDF-версия таблицы игр</button>
+    
 </html>
