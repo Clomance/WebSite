@@ -97,5 +97,5 @@
 
     file_put_contents("Games.pdf",$file_data);
 
-    header("Location: Games.pdf");
+    header("Location: index.php");
 ?>
