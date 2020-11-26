@@ -91,14 +91,11 @@
         }
     }
 
-//     $pdf->Output("D","Games.pdf",true);
+    $file_data = $pdf->Output("S");
 
-//     // We'll be outputting a PDF
-//     header('Content-type: application/pdf');
+    fopen("Games.pdf","w+");
 
-//     // It will be called downloaded.pdf
-//     header('Content-Disposition: attachment; filename="downloaded.pdf"');
+    file_put_contents("Games.pdf",$file_data);
 
-//     // The PDF source is in original.pdf
-//     readfile('Games.pdf');
-// ?>
+    header("Location: Games.pdf");
+?>
