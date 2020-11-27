@@ -1418,8 +1418,7 @@ protected function _parsejpg($file)
 	return array('w'=>$a[0], 'h'=>$a[1], 'cs'=>$colspace, 'bpc'=>$bpc, 'f'=>'DCTDecode', 'data'=>$data);
 }
 
-protected function _parsepng($file)
-{
+protected function _parsepng($file){
 	// Extract info from a PNG file
 	$f = fopen($file,'rb');
 	if(!$f)
