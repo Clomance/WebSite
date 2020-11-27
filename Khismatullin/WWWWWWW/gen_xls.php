@@ -1,10 +1,29 @@
 <?php
-    //require_once("php_xls/src/PhpSpreadsheet/Spreadsheet.php");
+    require_once('php_excel/Classes/PHPExcel.php');
+    require_once('php_excel/Classes/PHPExcel/Writer/Excel2007.php');
 
-    require_once('php_excel/Classes/PHPExcel.php'); 
+    $mysqli = new mysqli("eu-cdbr-west-03.cleardb.net", "be979b4b739385", "67d2bc8a", "heroku_59a01e27452dafc");
+    if ($mysqli->connect_errno) {
+        echo "Не удалось подключиться к БД";
+    }
 
-    // Подключаем класс для вывода данных в формате excel
-    require_once('php_excel/Classes/PHPExcel/Writer/Excel2007.php'); 
+    // Запрос на выборку сведений о пользователях
+    $result = $mysqli->query("SELECT
+        games.name as game_name,
+        games.genre as game_genre,
+        games.developer as game_developer,
+        games.publisher as game_publisher,
+
+        game_keys.key_code,
+        game_keys.purchase_date,
+        game_keys.expiry_date,
+
+        stores.url as store_url
+
+        FROM game_keys
+        LEFT JOIN games ON game_keys.game_id=games.id
+        LEFT JOIN stores ON game_keys.store_id=stores.id"
+    );
 
     $xls = new PHPExcel();
 
@@ -13,31 +32,67 @@
     // Получаем активный лист
     $sheet = $xls->getActiveSheet();
     // Подписываем лист
-    $sheet->setTitle('Таблица умножения');
-    
+    $sheet->setTitle('Игры');
+
     // Вставляем текст в ячейку A1
-    $sheet->setCellValue("A1", 'Таблица умножения');
+    $sheet->setCellValue("A1", 'Игры');
     $sheet->getStyle('A1')->getFill()->setFillType(
         PHPExcel_Style_Fill::FILL_SOLID);
     $sheet->getStyle('A1')->getFill()->getStartColor()->setRGB('EEEEEE');
-    
+
     // Объединяем ячейки
-    $sheet->mergeCells('A1:H1');
-    
+    $sheet->mergeCells('A1:I1');
+
     // Выравнивание текста
     $sheet->getStyle('A1')->getAlignment()->setHorizontal(
         PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-    
-    for ($i = 2; $i < 10; $i++) {
-        for ($j = 2; $j < 10; $j++) {
-            // Выводим таблицу умножения
+
+    $header = array("п/п","Название","Жанр","Разработчик","Издатель",
+        "Ключ","Дата приобретения","Дата окончания","URL магазина");
+
+    $c = 0;
+
+    foreach ($header as $h){
+        $sheet->setCellValueByColumnAndRow(
+            $c,
+            2,
+            $h
+        );
+
+        // Применяем выравнивание
+        $sheet->getColumnDimensionByColumn($c)->setAutoSize(true);
+
+        $c++;
+    }
+
+    if ($result){
+        $r = 3;
+
+        // Для каждой строки из запроса
+        while ($row = $result->fetch_row()){
+            $c = 0;
+
             $sheet->setCellValueByColumnAndRow(
-                                            $i - 2,
-                                            $j,
-                                            $i . "x" .$j . "=" . ($i*$j));
-            // Применяем выравнивание
-            $sheet->getStyleByColumnAndRow($i - 2, $j)->getAlignment()->
-                    setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                $c,
+                $r,
+                $r-2
+            );
+
+            $c++;
+
+            foreach ($row as $cell){
+                $sheet->setCellValueByColumnAndRow(
+                    $c,
+                    $r,
+                    $cell
+                );
+                // Применяем выравнивание
+                //$sheet->getStyleByColumnAndRow($c, $r)->getAlignment()->setWrapText(true);
+
+                $c++;
+            }
+
+            $r++;
         }
     }
 
