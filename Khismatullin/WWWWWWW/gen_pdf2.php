@@ -93,7 +93,7 @@
         }
     }
 
-    $file_data = $pdf->Output("I",'Games.pdf',true);
+    // $file_data = $pdf->Output("I",'Games.pdf',true);
 
     // $length = strlen($file_data);
 
