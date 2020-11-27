@@ -74,8 +74,7 @@ protected $PDFVersion;         // PDF version number
 *                               Public methods                                 *
 *******************************************************************************/
 
-function __construct($orientation='P', $unit='mm', $size='A4')
-{
+function __construct($orientation='P', $unit='mm', $size='A4'){
 	// Some checks
 	$this->_dochecks();
 	// Initialization of properties
@@ -111,10 +110,12 @@ function __construct($orientation='P', $unit='mm', $size='A4')
 		if(substr($this->fontpath,-1)!='/' && substr($this->fontpath,-1)!='\\')
 			$this->fontpath .= '/';
 	}
-	elseif(is_dir(dirname(__FILE__).'/font'))
+	elseif(is_dir(dirname(__FILE__).'/font')){
 		$this->fontpath = dirname(__FILE__).'/font/';
-	else
+	}
+	else{
 		$this->fontpath = '';
+	}
 	// Core fonts
 	$this->CoreFonts = array('courier', 'helvetica', 'times', 'symbol', 'zapfdingbats');
 	// Scale factor
@@ -172,8 +173,7 @@ function __construct($orientation='P', $unit='mm', $size='A4')
 	$this->PDFVersion = '1.3';
 }
 
-function SetMargins($left, $top, $right=null)
-{
+function SetMargins($left, $top, $right=null){
 	// Set left, top and right margins
 	$this->lMargin = $left;
 	$this->tMargin = $top;
@@ -182,16 +182,14 @@ function SetMargins($left, $top, $right=null)
 	$this->rMargin = $right;
 }
 
-function SetLeftMargin($margin)
-{
+function SetLeftMargin($margin){
 	// Set left margin
 	$this->lMargin = $margin;
 	if($this->page>0 && $this->x<$margin)
 		$this->x = $margin;
 }
 
-function SetTopMargin($margin)
-{
+function SetTopMargin($margin){
 	// Set top margin
 	$this->tMargin = $margin;
 }
@@ -202,8 +200,7 @@ function SetRightMargin($margin)
 	$this->rMargin = $margin;
 }
 
-function SetAutoPageBreak($auto, $margin=0)
-{
+function SetAutoPageBreak($auto, $margin=0){
 	// Set auto page break mode and triggering margin
 	$this->AutoPageBreak = $auto;
 	$this->bMargin = $margin;
@@ -481,46 +478,42 @@ function AddFont($family, $style='', $file=''){
 	$name = '';
 	$originalsize = 0;
 	$ttfstat = stat($ttffilename);
-	if (file_exists($unifilename.'.mtx.php')) {
-		include($unifilename.'.mtx.php');
-	}
-	if (!isset($type) ||  !isset($name) || $originalsize != $ttfstat['size']) {
-		$ttffile = $ttffilename;
-		require_once($this->fontpath.'unifont/ttfonts.php');
-		$ttf = new TTFontFile();
-		$ttf->getMetrics($ttffile);
-		$cw = $ttf->charWidths;
-		$name = preg_replace('/[ ()]/','',$ttf->fullName);
 
-		$desc= array('Ascent'=>round($ttf->ascent),
-		'Descent'=>round($ttf->descent),
-		'CapHeight'=>round($ttf->capHeight),
-		'Flags'=>$ttf->flags,
-		'FontBBox'=>'['.round($ttf->bbox[0])." ".round($ttf->bbox[1])." ".round($ttf->bbox[2])." ".round($ttf->bbox[3]).']',
-		'ItalicAngle'=>$ttf->italicAngle,
-		'StemV'=>round($ttf->stemV),
-		'MissingWidth'=>round($ttf->defaultWidth));
-		$up = round($ttf->underlinePosition);
-		$ut = round($ttf->underlineThickness);
-		$originalsize = $ttfstat['size']+0;
-		$type = 'TTF';
-		// Generate metrics .php file
-		$s='<?php'."\n";
-		$s.='$name=\''.$name."';\n";
-		$s.='$type=\''.$type."';\n";
-		$s.='$desc='.var_export($desc,true).";\n";
-		$s.='$up='.$up.";\n";
-		$s.='$ut='.$ut.";\n";
-		$s.='$ttffile=\''.$ttffile."';\n";
-		$s.='$originalsize='.$originalsize.";\n";
-		$s.='$fontkey=\''.$fontkey."';\n";
-		$s.="?>";
+	$ttffile = $ttffilename;
+	require_once($this->fontpath.'unifont/ttfonts.php');
+	$ttf = new TTFontFile();
+	$ttf->getMetrics($ttffile);
+	$cw = $ttf->charWidths;
+	$name = preg_replace('/[ ()]/','',$ttf->fullName);
 
-		unset($ttf);
-	}
-	else {
-		$cw = @file_get_contents($unifilename.'.cw.dat'); 
-	}
+	$desc= array('Ascent'=>round($ttf->ascent),
+	'Descent'=>round($ttf->descent),
+	'CapHeight'=>round($ttf->capHeight),
+	'Flags'=>$ttf->flags,
+	'FontBBox'=>'['.round($ttf->bbox[0])." ".round($ttf->bbox[1])." ".round($ttf->bbox[2])." ".round($ttf->bbox[3]).']',
+	'ItalicAngle'=>$ttf->italicAngle,
+	'StemV'=>round($ttf->stemV),
+	'MissingWidth'=>round($ttf->defaultWidth));
+	$up = round($ttf->underlinePosition);
+	$ut = round($ttf->underlineThickness);
+	$originalsize = $ttfstat['size']+0;
+	$type = 'TTF';
+	// Generate metrics .php file
+	$s='<?php'."\n";
+	$s.='$name=\''.$name."';\n";
+	$s.='$type=\''.$type."';\n";
+	$s.='$desc='.var_export($desc,true).";\n";
+	$s.='$up='.$up.";\n";
+	$s.='$ut='.$ut.";\n";
+	$s.='$ttffile=\''.$ttffile."';\n";
+	$s.='$originalsize='.$originalsize.";\n";
+	$s.='$fontkey=\''.$fontkey."';\n";
+	$s.="?>";
+
+	echo "echo1";
+
+	unset($ttf);
+
 	$i = count($this->fonts)+1;
 	if(!empty($this->AliasNbPages))
 		$sbarr = range(0,57);
@@ -895,8 +888,7 @@ function MultiCell($w, $h, $txt, $border=0, $align='J', $fill=false)
 	$this->x = $this->lMargin;
 }
 
-function Write($h, $txt, $link='')
-{
+function Write($h, $txt, $link=''){
 	// Output text in flowing mode
 	if(!isset($this->CurrentFont))
 		$this->Error('No font has been set');
@@ -919,8 +911,7 @@ function Write($h, $txt, $link='')
 	$j = 0;
 	$l = 0;
 	$nl = 1;
-	while($i<$nb)
-	{
+	while($i<$nb){
 		// Get next character
 		if ($this->unifontSubset) {
 			$c = mb_substr($s,$i,1,'UTF-8');

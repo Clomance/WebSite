@@ -6,11 +6,11 @@
         echo "Не удалось подключиться к БД";
     }
 
-    $pdf = new tFPDF();
+    // $pdf = new tFPDF();
 
-    $pdf->AddFont('PDFFont','','pixel.ttf');
+    // $pdf->AddFont('PDFFont','','pixel.ttf');
 
-    $pdf->SetFont('PDFFont','',12);
+    // $pdf->SetFont('PDFFont','',12);
 
     // $pdf->AddPage();
 
