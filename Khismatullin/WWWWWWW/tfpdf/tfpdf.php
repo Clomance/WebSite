@@ -291,8 +291,7 @@ function Close()
 	$this->_enddoc();
 }
 
-function AddPage($orientation='', $size='', $rotation=0)
-{
+function AddPage($orientation='', $size='', $rotation=0){
 	// Start a new page
 	if($this->state==3)
 		$this->Error('The document is closed');
@@ -441,14 +440,12 @@ function SetLineWidth($width)
 		$this->_out(sprintf('%.2F w',$width*$this->k));
 }
 
-function Line($x1, $y1, $x2, $y2)
-{
+function Line($x1, $y1, $x2, $y2){
 	// Draw a line
 	$this->_out(sprintf('%.2F %.2F m %.2F %.2F l S',$x1*$this->k,($this->h-$y1)*$this->k,$x2*$this->k,($this->h-$y2)*$this->k));
 }
 
-function Rect($x, $y, $w, $h, $style='')
-{
+function Rect($x, $y, $w, $h, $style=''){
 	// Draw a rectangle
 	if($style=='F')
 		$op = 'f';
@@ -459,8 +456,7 @@ function Rect($x, $y, $w, $h, $style='')
 	$this->_out(sprintf('%.2F %.2F %.2F %.2F re %s',$x*$this->k,($this->h-$y)*$this->k,$w*$this->k,-$h*$this->k,$op));
 }
 
-function AddFont($family, $style='', $file='', $uni=false)
-{
+function AddFont($family, $style='', $file=''){
 	// Add a TrueType, OpenType or Type1 font
 	$family = strtolower($family);
 	$style = strtoupper($style);
@@ -477,122 +473,93 @@ function AddFont($family, $style='', $file='', $uni=false)
 	$fontkey = $family.$style;
 	if(isset($this->fonts[$fontkey]))
 		return;
-	if ($uni) {
-		if (defined("_SYSTEM_TTFONTS") && file_exists(_SYSTEM_TTFONTS.$file )) { $ttffilename = _SYSTEM_TTFONTS.$file ; }
-		else { $ttffilename = $this->fontpath.'unifont/'.$file ; }
-		$unifilename = $this->fontpath.'unifont/'.strtolower(substr($file ,0,(strpos($file ,'.'))));
-		$name = '';
-		$originalsize = 0;
-		$ttfstat = stat($ttffilename);
-		if (file_exists($unifilename.'.mtx.php')) {
-			include($unifilename.'.mtx.php');
-		}
-		if (!isset($type) ||  !isset($name) || $originalsize != $ttfstat['size']) {
-			$ttffile = $ttffilename;
-			require_once($this->fontpath.'unifont/ttfonts.php');
-			$ttf = new TTFontFile();
-			$ttf->getMetrics($ttffile);
-			$cw = $ttf->charWidths;
-			$name = preg_replace('/[ ()]/','',$ttf->fullName);
+	
+	$ttffilename = $this->fontpath.'unifont/'.$file ;;
 
-			$desc= array('Ascent'=>round($ttf->ascent),
-			'Descent'=>round($ttf->descent),
-			'CapHeight'=>round($ttf->capHeight),
-			'Flags'=>$ttf->flags,
-			'FontBBox'=>'['.round($ttf->bbox[0])." ".round($ttf->bbox[1])." ".round($ttf->bbox[2])." ".round($ttf->bbox[3]).']',
-			'ItalicAngle'=>$ttf->italicAngle,
-			'StemV'=>round($ttf->stemV),
-			'MissingWidth'=>round($ttf->defaultWidth));
-			$up = round($ttf->underlinePosition);
-			$ut = round($ttf->underlineThickness);
-			$originalsize = $ttfstat['size']+0;
-			$type = 'TTF';
-			// Generate metrics .php file
-			$s='<?php'."\n";
-			$s.='$name=\''.$name."';\n";
-			$s.='$type=\''.$type."';\n";
-			$s.='$desc='.var_export($desc,true).";\n";
-			$s.='$up='.$up.";\n";
-			$s.='$ut='.$ut.";\n";
-			$s.='$ttffile=\''.$ttffile."';\n";
-			$s.='$originalsize='.$originalsize.";\n";
-			$s.='$fontkey=\''.$fontkey."';\n";
-			$s.="?>";
-			if (is_writable(dirname($this->fontpath.'unifont/'.'x'))) {
-				$fh = fopen($unifilename.'.mtx.php',"w");
-				fwrite($fh,$s,strlen($s));
-				fclose($fh);
-				$fh = fopen($unifilename.'.cw.dat',"wb");
-				fwrite($fh,$cw,strlen($cw));
-				fclose($fh);
-				@unlink($unifilename.'.cw127.php');
-			}
-			unset($ttf);
-		}
-		else {
-			$cw = @file_get_contents($unifilename.'.cw.dat'); 
-		}
-		$i = count($this->fonts)+1;
-		if(!empty($this->AliasNbPages))
-			$sbarr = range(0,57);
-		else
-			$sbarr = range(0,32);
-		$this->fonts[$fontkey] = array('i'=>$i, 'type'=>$type, 'name'=>$name, 'desc'=>$desc, 'up'=>$up, 'ut'=>$ut, 'cw'=>$cw, 'ttffile'=>$ttffile, 'fontkey'=>$fontkey, 'subset'=>$sbarr, 'unifilename'=>$unifilename);
+	$unifilename = $this->fontpath.'unifont/'.strtolower(substr($file ,0,(strpos($file ,'.'))));
 
-		$this->FontFiles[$fontkey]=array('length1'=>$originalsize, 'type'=>"TTF", 'ttffile'=>$ttffile);
-		$this->FontFiles[$file]=array('type'=>"TTF");
-		unset($cw);
+	$name = '';
+	$originalsize = 0;
+	$ttfstat = stat($ttffilename);
+	if (file_exists($unifilename.'.mtx.php')) {
+		include($unifilename.'.mtx.php');
+	}
+	if (!isset($type) ||  !isset($name) || $originalsize != $ttfstat['size']) {
+		$ttffile = $ttffilename;
+		require_once($this->fontpath.'unifont/ttfonts.php');
+		$ttf = new TTFontFile();
+		$ttf->getMetrics($ttffile);
+		$cw = $ttf->charWidths;
+		$name = preg_replace('/[ ()]/','',$ttf->fullName);
+
+		$desc= array('Ascent'=>round($ttf->ascent),
+		'Descent'=>round($ttf->descent),
+		'CapHeight'=>round($ttf->capHeight),
+		'Flags'=>$ttf->flags,
+		'FontBBox'=>'['.round($ttf->bbox[0])." ".round($ttf->bbox[1])." ".round($ttf->bbox[2])." ".round($ttf->bbox[3]).']',
+		'ItalicAngle'=>$ttf->italicAngle,
+		'StemV'=>round($ttf->stemV),
+		'MissingWidth'=>round($ttf->defaultWidth));
+		$up = round($ttf->underlinePosition);
+		$ut = round($ttf->underlineThickness);
+		$originalsize = $ttfstat['size']+0;
+		$type = 'TTF';
+		// Generate metrics .php file
+		$s='<?php'."\n";
+		$s.='$name=\''.$name."';\n";
+		$s.='$type=\''.$type."';\n";
+		$s.='$desc='.var_export($desc,true).";\n";
+		$s.='$up='.$up.";\n";
+		$s.='$ut='.$ut.";\n";
+		$s.='$ttffile=\''.$ttffile."';\n";
+		$s.='$originalsize='.$originalsize.";\n";
+		$s.='$fontkey=\''.$fontkey."';\n";
+		$s.="?>";
+
+		unset($ttf);
 	}
 	else {
-		$info = $this->_loadfont($file);
-		$info['i'] = count($this->fonts)+1;
-		if(!empty($info['file']))
-		{
-			// Embedded font
-			if($info['type']=='TrueType')
-				$this->FontFiles[$info['file']] = array('length1'=>$info['originalsize']);
-			else
-				$this->FontFiles[$info['file']] = array('length1'=>$info['size1'], 'length2'=>$info['size2']);
-		}
-		$this->fonts[$fontkey] = $info;
+		$cw = @file_get_contents($unifilename.'.cw.dat'); 
 	}
+	$i = count($this->fonts)+1;
+	if(!empty($this->AliasNbPages))
+		$sbarr = range(0,57);
+	else
+		$sbarr = range(0,32);
+	$this->fonts[$fontkey] = array('i'=>$i, 'type'=>$type, 'name'=>$name, 'desc'=>$desc, 'up'=>$up, 'ut'=>$ut, 'cw'=>$cw, 'ttffile'=>$ttffile, 'fontkey'=>$fontkey, 'subset'=>$sbarr, 'unifilename'=>$unifilename);
+
+	$this->FontFiles[$fontkey]=array('length1'=>$originalsize, 'type'=>"TTF", 'ttffile'=>$ttffile);
+	$this->FontFiles[$file]=array('type'=>"TTF");
+	unset($cw);
 }
 
-function SetFont($family, $style='', $size=0)
-{
-	// Select a font; size given in points
-	if($family=='')
-		$family = $this->FontFamily;
-	else
-		$family = strtolower($family);
+function SetFont($family, $style='', $size=0){
+	$family = strtolower($family);
 	$style = strtoupper($style);
-	if(strpos($style,'U')!==false)
-	{
+
+	if(strpos($style,'U')!==false){
 		$this->underline = true;
 		$style = str_replace('U','',$style);
 	}
 	else
 		$this->underline = false;
+
 	if($style=='IB')
 		$style = 'BI';
+
 	if($size==0)
 		$size = $this->FontSizePt;
+
 	// Test if font is already selected
 	if($this->FontFamily==$family && $this->FontStyle==$style && $this->FontSizePt==$size)
 		return;
 
 	// Test if font is already loaded
 	$fontkey = $family.$style;
-	if(!isset($this->fonts[$fontkey]))
-	{
-		// Test if one of the core fonts
-		if($family=='arial')
-			$family = 'helvetica';
-		if(in_array($family,$this->CoreFonts))
-		{
-			if($family=='symbol' || $family=='zapfdingbats')
-				$style = '';
+	if(!isset($this->fonts[$fontkey])){
+		if(in_array($family,$this->CoreFonts)){
 			$fontkey = $family.$style;
+
 			if(!isset($this->fonts[$fontkey]))
 				$this->AddFont($family,$style);
 		}
@@ -611,8 +578,7 @@ function SetFont($family, $style='', $size=0)
 		$this->_out(sprintf('BT /F%d %.2F Tf ET',$this->CurrentFont['i'],$this->FontSizePt));
 }
 
-function SetFontSize($size)
-{
+function SetFontSize($size){
 	// Set font size in points
 	if($this->FontSizePt==$size)
 		return;
@@ -622,16 +588,14 @@ function SetFontSize($size)
 		$this->_out(sprintf('BT /F%d %.2F Tf ET',$this->CurrentFont['i'],$this->FontSizePt));
 }
 
-function AddLink()
-{
+function AddLink(){
 	// Create a new internal link
 	$n = count($this->links)+1;
 	$this->links[$n] = array(0, 0);
 	return $n;
 }
 
-function SetLink($link, $y=0, $page=-1)
-{
+function SetLink($link, $y=0, $page=-1){
 	// Set destination of internal link
 	if($y==-1)
 		$y = $this->y;
@@ -640,14 +604,12 @@ function SetLink($link, $y=0, $page=-1)
 	$this->links[$link] = array($page, $y);
 }
 
-function Link($x, $y, $w, $h, $link)
-{
+function Link($x, $y, $w, $h, $link){
 	// Put a link on the page
 	$this->PageLinks[$this->page][] = array($x*$this->k, $this->hPt-$y*$this->k, $w*$this->k, $h*$this->k, $link);
 }
 
-function Text($x, $y, $txt)
-{
+function Text($x, $y, $txt){
 	// Output a string
 	$txt = (string)$txt;
 	if(!isset($this->CurrentFont))
@@ -668,14 +630,12 @@ function Text($x, $y, $txt)
 	$this->_out($s);
 }
 
-function AcceptPageBreak()
-{
+function AcceptPageBreak(){
 	// Accept automatic page break or not
 	return $this->AutoPageBreak;
 }
 
-function Cell($w, $h=0, $txt='', $border=0, $ln=0, $align='', $fill=false, $link='')
-{
+function Cell($w, $h=0, $txt='', $border=0, $ln=0, $align='', $fill=false, $link=''){
 	// Output a cell
 	$txt = (string)$txt;
 	$k = $this->k;
@@ -2037,7 +1997,7 @@ protected function _putTTfontwidths(&$font, $maxUni) {
 
 	// for each character
 	for ($cid=$startcid; $cid<$cwlen; $cid++) {
-		if ($cid==128 && (!file_exists($font['unifilename'].'.cw127.php'))) {
+		/* if ($cid==128 && (!file_exists($font['unifilename'].'.cw127.php'))) {
 			if (is_writable(dirname($this->fontpath.'unifont/x'))) {
 				$fh = fopen($font['unifilename'].'.cw127.php',"wb");
 				$cw127='<?php'."\n";
@@ -2051,7 +2011,7 @@ protected function _putTTfontwidths(&$font, $maxUni) {
 				fwrite($fh,$cw127,strlen($cw127));
 				fclose($fh);
 			}
-		}
+		}*/
 		if ((!isset($font['cw'][$cid*2]) || !isset($font['cw'][$cid*2+1])) || 
                     ($font['cw'][$cid*2] == "\00" && $font['cw'][$cid*2+1] == "\00")) { continue; }
 

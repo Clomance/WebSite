@@ -7,18 +7,20 @@
     }
 
     $pdf = new tFPDF();
-    $pdf->AddPage();
 
-    $pdf->AddFont('PDFFont','','pixel.ttf',true);
+    $pdf->AddFont('PDFFont','','pixel.ttf');
 
     $pdf->SetFont('PDFFont','',12);
+
+    $pdf->AddPage();
+
     $pdf->Cell(80);
     $txt ='Игры';
 
     $pdf->Cell(30,10,$txt,1,0,'C');
     $pdf->Ln(20);
 
-    $pdf->SetFont('PDFFont','',6);
+    $pdf->SetFontSize(6);
 
     // Запрос на выборку сведений о пользователях
     $result = $mysqli->query("SELECT
@@ -95,17 +97,17 @@
 
     $length = strlen($file_data);
 
-    // header('Content-Description: File Transfer');
-    // header('Content-Type: text/plain');
-    // header('Content-Disposition: attachment; filename=Games.pdf');
-    // header('Content-Transfer-Encoding: binary');
-    // header('Content-Length: ' . $length);
-    // header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-    // header('Expires: 0');
-    // header('Pragma: public');
+    header('Content-Description: File Transfer');
+    header('Content-Type: text/plain');
+    header('Content-Disposition: attachment; filename=Games.pdf');
+    header('Content-Transfer-Encoding: binary');
+    header('Content-Length: ' . $length);
+    header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+    header('Expires: 0');
+    header('Pragma: public');
 
-    echo "aaaa$file_data";
-    // exit;
+    echo $file_data;
+    exit;
 
     //header("Location: index.php");
 ?>
