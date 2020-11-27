@@ -1,0 +1,13 @@
+{
+    "name": "php/website",
+    "description": "",
+    "homepage": "https://github.com/PHPOffice/PHPExcel",
+    "type": "package",
+    "authors": [],
+    "require": {
+        "php": "^5.2|^7.0",
+        "ext-mbstring": "*",
+        "ext-xml": "*",
+        "ext-xmlwriter": "*"
+    }
+}

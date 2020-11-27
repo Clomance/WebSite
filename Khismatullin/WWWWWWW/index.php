@@ -32,4 +32,5 @@
     </ul>
 
     <button onclick="window.location.href='gen_pdf.php'">PDF-версия таблицы игр</button>
+    <button onclick="window.location.href='gen_xls.php'">XML-версия таблицы игр</button>
 </html>
