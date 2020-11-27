@@ -275,7 +275,7 @@ function Close(){
 function AddPage($orientation='', $size='', $rotation=0){
 	// Start a new page
 	if($this->state==3)
-		echo 'The document is closed';
+		return;
 	$family = $this->FontFamily;
 	$style = $this->FontStyle.($this->underline ? 'U' : '');
 	$fontsize = $this->FontSizePt;
@@ -490,8 +490,6 @@ function AddFont($family, $style='', $file=''){
 	$s.='$fontkey=\''.$fontkey."';\n";
 	$s.="?>";
 
-	echo "echo1";
-
 	unset($ttf);
 
 	$i = count($this->fonts)+1;
@@ -536,8 +534,6 @@ function SetFont($family, $style='', $size=0){
 			if(!isset($this->fonts[$fontkey]))
 				$this->AddFont($family,$style);
 		}
-		else
-			echo('Undefined font: '.$family.' '.$style);
 	}
 	// Select it
 	$this->FontFamily = $family;

@@ -93,21 +93,21 @@
         }
     }
 
-    $file_data = $pdf->Output("S");
+    $file_data = $pdf->Output("D",'Games.pdf',true);
 
-    $length = strlen($file_data);
+    // $length = strlen($file_data);
 
-    header('Content-Description: File Transfer');
-    header('Content-Type: text/plain');
-    header('Content-Disposition: attachment; filename=Games.pdf');
-    header('Content-Transfer-Encoding: binary');
-    header('Content-Length: ' . $length);
-    header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-    header('Expires: 0');
-    header('Pragma: public');
+    // header('Content-Description: File Transfer');
+    // header('Content-Type: text/plain');
+    // header('Content-Disposition: attachment; filename=Games.pdf');
+    // header('Content-Transfer-Encoding: binary');
+    // header('Content-Length: ' . $length);
+    // header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+    // header('Expires: 0');
+    // header('Pragma: public');
 
-    echo $file_data;
-    exit;
+    // echo $file_data;
+    // exit;
 
     //header("Location: index.php");
 ?>
