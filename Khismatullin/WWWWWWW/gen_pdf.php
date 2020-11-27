@@ -15,9 +15,8 @@
     $pdf->AddPage();
 
     $pdf->Cell(80);
-    $txt ='Игры';
 
-    $pdf->Cell(30,10,$txt,1,0,'C');
+    $pdf->Cell(30,10,'Игры',1,0,'C');
     $pdf->Ln(20);
 
     $pdf->SetFontSize(6);

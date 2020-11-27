@@ -312,8 +312,7 @@ function AddPage($orientation='', $size='', $rotation=0){
 	$this->Header();
 	$this->InHeader = false;
 	// Restore line width
-	if($this->LineWidth!=$lw)
-	{
+	if($this->LineWidth!=$lw){
 		$this->LineWidth = $lw;
 		$this->_out(sprintf('%.2F w',$lw*$this->k));
 	}
@@ -321,13 +320,11 @@ function AddPage($orientation='', $size='', $rotation=0){
 	if($family)
 		$this->SetFont($family,$style,$fontsize);
 	// Restore colors
-	if($this->DrawColor!=$dc)
-	{
+	if($this->DrawColor!=$dc){
 		$this->DrawColor = $dc;
 		$this->_out($dc);
 	}
-	if($this->FillColor!=$fc)
-	{
+	if($this->FillColor!=$fc){
 		$this->FillColor = $fc;
 		$this->_out($fc);
 	}
@@ -599,20 +596,17 @@ function Cell($w, $h=0, $txt='', $border=0, $ln=0, $align='', $fill=false, $link
 	// Output a cell
 	$txt = (string)$txt;
 	$k = $this->k;
-	if($this->y+$h>$this->PageBreakTrigger && !$this->InHeader && !$this->InFooter && $this->AcceptPageBreak())
-	{
+	if($this->y+$h>$this->PageBreakTrigger && !$this->InHeader && !$this->InFooter && $this->AcceptPageBreak()){
 		// Automatic page break
 		$x = $this->x;
 		$ws = $this->ws;
-		if($ws>0)
-		{
+		if($ws>0){
 			$this->ws = 0;
 			$this->_out('0 Tw');
 		}
 		$this->AddPage($this->CurOrientation,$this->CurPageSize,$this->CurRotation);
 		$this->x = $x;
-		if($ws>0)
-		{
+		if($ws>0){
 			$this->ws = $ws;
 			$this->_out(sprintf('%.3F Tw',$ws*$k));
 		}
@@ -620,16 +614,14 @@ function Cell($w, $h=0, $txt='', $border=0, $ln=0, $align='', $fill=false, $link
 	if($w==0)
 		$w = $this->w-$this->rMargin-$this->x;
 	$s = '';
-	if($fill || $border==1)
-	{
+	if($fill || $border==1){
 		if($fill)
 			$op = ($border==1) ? 'B' : 'f';
 		else
 			$op = 'S';
 		$s = sprintf('%.2F %.2F %.2F %.2F re %s ',$this->x*$k,($this->h-$this->y)*$k,$w*$k,-$h*$k,$op);
 	}
-	if(is_string($border))
-	{
+	if(is_string($border)){
 		$x = $this->x;
 		$y = $this->y;
 		if(strpos($border,'L')!==false)
@@ -641,8 +633,7 @@ function Cell($w, $h=0, $txt='', $border=0, $ln=0, $align='', $fill=false, $link
 		if(strpos($border,'B')!==false)
 			$s .= sprintf('%.2F %.2F m %.2F %.2F l S ',$x*$k,($this->h-($y+$h))*$k,($x+$w)*$k,($this->h-($y+$h))*$k);
 	}
-	if($txt!=='')
-	{
+	if($txt!==''){
 		if(!isset($this->CurrentFont))
 			return;
 		if($align=='R')
@@ -749,8 +740,7 @@ function Write($h, $txt, $link=''){
 			$sep = -1;
 			$j = $i;
 			$l = 0;
-			if($nl==1)
-			{
+			if($nl==1){
 				$this->x = $this->lMargin;
 				$w = $this->w-$this->rMargin-$this->x;
 				$wmax = ($w-2*$this->cMargin);
@@ -764,13 +754,10 @@ function Write($h, $txt, $link=''){
 		if ($this->unifontSubset) { $l += $this->GetStringWidth($c); }
 		else { $l += $cw[$c]*$this->FontSize/1000; }
 
-		if($l>$wmax)
-		{
+		if($l>$wmax){
 			// Automatic line break
-			if($sep==-1)
-			{
-				if($this->x>$this->lMargin)
-				{
+			if($sep==-1){
+				if($this->x>$this->lMargin){
 					// Move to next line
 					$this->x = $this->lMargin;
 					$this->y += $h;
@@ -789,9 +776,8 @@ function Write($h, $txt, $link=''){
 					$this->Cell($w,$h,substr($s,$j,$i-$j),0,2,'',false,$link);
 				}
 			}
-			else
-			{
-				if ($this->unifontSubset) {
+			else{
+				if ($this->unifontSubset){
 					$this->Cell($w,$h,mb_substr($s,$j,$sep-$j,'UTF-8'),0,2,'',false,$link);
 				}
 				else {
@@ -802,8 +788,7 @@ function Write($h, $txt, $link=''){
 			$sep = -1;
 			$j = $i;
 			$l = 0;
-			if($nl==1)
-			{
+			if($nl==1){
 				$this->x = $this->lMargin;
 				$w = $this->w-$this->rMargin-$this->x;
 				$wmax = ($w-2*$this->cMargin);
@@ -815,7 +800,7 @@ function Write($h, $txt, $link=''){
 	}
 	// Last chunk
 	if($i!=$j) {
-		if ($this->unifontSubset) {
+		if ($this->unifontSubset){
 			$this->Cell($l,$h,mb_substr($s,$j,$i-$j,'UTF-8'),0,0,'',false,$link);
 		}
 		else {
@@ -859,8 +844,7 @@ function Image($file, $x=null, $y=null, $w=0, $h=0, $type='', $link=''){
 		$info = $this->images[$file];
 
 	// Automatic width and height calculation if needed
-	if($w==0 && $h==0)
-	{
+	if($w==0 && $h==0){
 		// Put image at 96 dpi
 		$w = -96;
 		$h = -96;
@@ -875,10 +859,8 @@ function Image($file, $x=null, $y=null, $w=0, $h=0, $type='', $link=''){
 		$h = $w*$info['h']/$info['w'];
 
 	// Flowing mode
-	if($y===null)
-	{
-		if($this->y+$h>$this->PageBreakTrigger && !$this->InHeader && !$this->InFooter && $this->AcceptPageBreak())
-		{
+	if($y===null){
+		if($this->y+$h>$this->PageBreakTrigger && !$this->InHeader && !$this->InFooter && $this->AcceptPageBreak()){
 			// Automatic page break
 			$x2 = $this->x;
 			$this->AddPage($this->CurOrientation,$this->CurPageSize,$this->CurRotation);
@@ -895,26 +877,22 @@ function Image($file, $x=null, $y=null, $w=0, $h=0, $type='', $link=''){
 		$this->Link($x,$y,$w,$h,$link);
 }
 
-function GetPageWidth()
-{
+function GetPageWidth(){
 	// Get current page width
 	return $this->w;
 }
 
-function GetPageHeight()
-{
+function GetPageHeight(){
 	// Get current page height
 	return $this->h;
 }
 
-function GetX()
-{
+function GetX(){
 	// Get x position
 	return $this->x;
 }
 
-function SetX($x)
-{
+function SetX($x){
 	// Set x position
 	if($x>=0)
 		$this->x = $x;
@@ -922,14 +900,12 @@ function SetX($x)
 		$this->x = $this->w+$x;
 }
 
-function GetY()
-{
+function GetY(){
 	// Get y position
 	return $this->y;
 }
 
-function SetY($y, $resetX=true)
-{
+function SetY($y, $resetX=true){
 	// Set y position and optionally reset x
 	if($y>=0)
 		$this->y = $y;
@@ -939,8 +915,7 @@ function SetY($y, $resetX=true)
 		$this->x = $this->lMargin;
 }
 
-function SetXY($x, $y)
-{
+function SetXY($x, $y){
 	// Set x and y positions
 	$this->SetX($x);
 	$this->SetY($y,false);
@@ -1031,8 +1006,7 @@ protected function _getpagesize($size){
 	}
 }
 
-protected function _beginpage($orientation, $size, $rotation)
-{
+protected function _beginpage($orientation, $size, $rotation){
 	$this->page++;
 	$this->pages[$this->page] = '';
 	$this->state = 2;
@@ -1048,16 +1022,13 @@ protected function _beginpage($orientation, $size, $rotation)
 		$size = $this->DefPageSize;
 	else
 		$size = $this->_getpagesize($size);
-	if($orientation!=$this->CurOrientation || $size[0]!=$this->CurPageSize[0] || $size[1]!=$this->CurPageSize[1])
-	{
+	if($orientation!=$this->CurOrientation || $size[0]!=$this->CurPageSize[0] || $size[1]!=$this->CurPageSize[1]){
 		// New size or orientation
-		if($orientation=='P')
-		{
+		if($orientation=='P'){
 			$this->w = $size[0];
 			$this->h = $size[1];
 		}
-		else
-		{
+		else{
 			$this->w = $size[1];
 			$this->h = $size[0];
 		}
@@ -1098,8 +1069,7 @@ protected function _loadfont($font){
 protected function _isascii($s){
 	// Test if string is ASCII
 	$nb = strlen($s);
-	for($i=0;$i<$nb;$i++)
-	{
+	for($i=0;$i<$nb;$i++){
 		if(ord($s[$i])>127)
 			return false;
 	}
@@ -1125,23 +1095,20 @@ protected function _UTF8toUTF16($s){
 	$i = 0;
 	while($i<$nb){
 		$c1 = ord($s[$i++]);
-		if($c1>=224)
-		{
+		if($c1>=224){
 			// 3-byte character
 			$c2 = ord($s[$i++]);
 			$c3 = ord($s[$i++]);
 			$res .= chr((($c1 & 0x0F)<<4) + (($c2 & 0x3C)>>2));
 			$res .= chr((($c2 & 0x03)<<6) + ($c3 & 0x3F));
 		}
-		elseif($c1>=192)
-		{
+		elseif($c1>=192){
 			// 2-byte character
 			$c2 = ord($s[$i++]);
 			$res .= chr(($c1 & 0x1C)>>2);
 			$res .= chr((($c1 & 0x03)<<6) + ($c2 & 0x3F));
 		}
-		else
-		{
+		else{
 			// Single-byte character
 			$res .= "\0".chr($c1);
 		}
@@ -1149,8 +1116,7 @@ protected function _UTF8toUTF16($s){
 	return $res;
 }
 
-protected function _escape($s)
-{
+protected function _escape($s){
 	// Escape special characters
 	if(strpos($s,'(')!==false || strpos($s,')')!==false || strpos($s,'\\')!==false || strpos($s,"\r")!==false)
 		return str_replace(array('\\','(',')',"\r"), array('\\\\','\\(','\\)','\\r'), $s);
@@ -1158,16 +1124,14 @@ protected function _escape($s)
 		return $s;
 }
 
-protected function _textstring($s)
-{
+protected function _textstring($s){
 	// Format a text string
 	if(!$this->_isascii($s))
 		$s = $this->_UTF8toUTF16($s);
 	return '('.$this->_escape($s).')';
 }
 
-protected function _dounderline($x, $y, $txt)
-{
+protected function _dounderline($x, $y, $txt){
 	// Underline text
 	$up = $this->CurrentFont['up'];
 	$ut = $this->CurrentFont['ut'];
@@ -1175,8 +1139,7 @@ protected function _dounderline($x, $y, $txt)
 	return sprintf('%.2F %.2F %.2F %.2F re f',$x*$this->k,($this->h-($y-$up/1000*$this->FontSize))*$this->k,$w*$this->k,-$ut/1000*$this->FontSizePt);
 }
 
-protected function _parsejpg($file)
-{
+protected function _parsejpg($file){
 	// Extract info from a JPEG file
 	$a = getimagesize($file);
 	if(!$a)
@@ -1204,8 +1167,7 @@ protected function _parsepng($file){
 	return $info;
 }
 
-protected function _parsepngstream($f, $file)
-{
+protected function _parsepngstream($f, $file){
 	// Check signature
 	if($this->_readstream($f,8)!=chr(137).'PNG'.chr(13).chr(10).chr(26).chr(10))
 		$this->Error('Not a PNG file: '.$file);
@@ -1241,18 +1203,15 @@ protected function _parsepngstream($f, $file)
 	$pal = '';
 	$trns = '';
 	$data = '';
-	do
-	{
+	do{
 		$n = $this->_readint($f);
 		$type = $this->_readstream($f,4);
-		if($type=='PLTE')
-		{
+		if($type=='PLTE'){
 			// Read palette
 			$pal = $this->_readstream($f,$n);
 			$this->_readstream($f,4);
 		}
-		elseif($type=='tRNS')
-		{
+		elseif($type=='tRNS'){
 			// Read transparency info
 			$t = $this->_readstream($f,$n);
 			if($ct==0)
@@ -1267,8 +1226,7 @@ protected function _parsepngstream($f, $file)
 			}
 			$this->_readstream($f,4);
 		}
-		elseif($type=='IDAT')
-		{
+		elseif($type=='IDAT'){
 			// Read image data block
 			$data .= $this->_readstream($f,$n);
 			$this->_readstream($f,4);
@@ -1283,20 +1241,17 @@ protected function _parsepngstream($f, $file)
 	if($colspace=='Indexed' && empty($pal))
 		$this->Error('Missing palette in '.$file);
 	$info = array('w'=>$w, 'h'=>$h, 'cs'=>$colspace, 'bpc'=>$bpc, 'f'=>'FlateDecode', 'dp'=>$dp, 'pal'=>$pal, 'trns'=>$trns);
-	if($ct>=4)
-	{
+	if($ct>=4){
 		// Extract alpha channel
 		if(!function_exists('gzuncompress'))
 			$this->Error('Zlib not available, can\'t handle alpha channel: '.$file);
 		$data = gzuncompress($data);
 		$color = '';
 		$alpha = '';
-		if($ct==4)
-		{
+		if($ct==4){
 			// Gray image
 			$len = 2*$w;
-			for($i=0;$i<$h;$i++)
-			{
+			for($i=0;$i<$h;$i++){
 				$pos = (1+$len)*$i;
 				$color .= $data[$pos];
 				$alpha .= $data[$pos];
@@ -1305,12 +1260,10 @@ protected function _parsepngstream($f, $file)
 				$alpha .= preg_replace('/.(.)/s','$1',$line);
 			}
 		}
-		else
-		{
+		else{
 			// RGB image
 			$len = 4*$w;
-			for($i=0;$i<$h;$i++)
-			{
+			for($i=0;$i<$h;$i++){
 				$pos = (1+$len)*$i;
 				$color .= $data[$pos];
 				$alpha .= $data[$pos];
@@ -1330,12 +1283,10 @@ protected function _parsepngstream($f, $file)
 	return $info;
 }
 
-protected function _readstream($f, $n)
-{
+protected function _readstream($f, $n){
 	// Read n bytes from stream
 	$res = '';
-	while($n>0 && !feof($f))
-	{
+	while($n>0 && !feof($f)){
 		$s = fread($f,$n);
 		if($s===false)
 			$this->Error('Error while reading stream');
@@ -2035,44 +1986,41 @@ protected function _enddoc()
 }
 
 // ********* NEW FUNCTIONS *********
-// Converts UTF-8 strings to UTF16-BE.
-protected function UTF8ToUTF16BE($str, $setbom=true) {
-	$outstr = "";
-	if ($setbom) {
-		$outstr .= "\xFE\xFF"; // Byte Order Mark (BOM)
+	// Converts UTF-8 strings to UTF16-BE.
+	protected function UTF8ToUTF16BE($str, $setbom=true) {
+		$outstr = "";
+		if ($setbom) {
+			$outstr .= "\xFE\xFF"; // Byte Order Mark (BOM)
+		}
+		$outstr .= iconv('UTF-8','UTF-16BE',$str);
+		return $outstr;
 	}
-	$outstr .= mb_convert_encoding($str, 'UTF-16BE', 'UTF-8');
-	return $outstr;
-}
 
-// Converts UTF-8 strings to codepoints array
-protected function UTF8StringToArray($str) {
-   $out = array();
-   $len = strlen($str);
-   for ($i = 0; $i < $len; $i++) {
-	$uni = -1;
-      $h = ord($str[$i]);
-      if ( $h <= 0x7F )
-         $uni = $h;
-      elseif ( $h >= 0xC2 ) {
-         if ( ($h <= 0xDF) && ($i < $len -1) )
-            $uni = ($h & 0x1F) << 6 | (ord($str[++$i]) & 0x3F);
-         elseif ( ($h <= 0xEF) && ($i < $len -2) )
-            $uni = ($h & 0x0F) << 12 | (ord($str[++$i]) & 0x3F) << 6
-                                       | (ord($str[++$i]) & 0x3F);
-         elseif ( ($h <= 0xF4) && ($i < $len -3) )
-            $uni = ($h & 0x0F) << 18 | (ord($str[++$i]) & 0x3F) << 12
-                                       | (ord($str[++$i]) & 0x3F) << 6
-                                       | (ord($str[++$i]) & 0x3F);
-      }
-	if ($uni >= 0) {
-		$out[] = $uni;
+	// Converts UTF-8 strings to codepoints array
+	protected function UTF8StringToArray($str) {
+		$out = array();
+		$len = strlen($str);
+		for ($i = 0; $i < $len; $i++) {
+			$uni = -1;
+			$h = ord($str[$i]);
+			if ( $h <= 0x7F )
+				$uni = $h;
+			elseif ( $h >= 0xC2 ) {
+				if ( ($h <= 0xDF) && ($i < $len -1) )
+					$uni = ($h & 0x1F) << 6 | (ord($str[++$i]) & 0x3F);
+				elseif ( ($h <= 0xEF) && ($i < $len -2) )
+					$uni = ($h & 0x0F) << 12 | (ord($str[++$i]) & 0x3F) << 6
+											| (ord($str[++$i]) & 0x3F);
+				elseif ( ($h <= 0xF4) && ($i < $len -3) )
+					$uni = ($h & 0x0F) << 18 | (ord($str[++$i]) & 0x3F) << 12
+											| (ord($str[++$i]) & 0x3F) << 6
+											| (ord($str[++$i]) & 0x3F);
+			}
+			if ($uni >= 0) {
+				$out[] = $uni;
+			}
+		}
+		return $out;
 	}
-   }
-   return $out;
-}
-
-
-
 }
 ?>

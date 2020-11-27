@@ -12,7 +12,7 @@
 
     $pdf->SetFont('PDFFont','',12);
 
-    // $pdf->AddPage();
+    $pdf->AddPage();
 
     // $pdf->Cell(80);
     // $txt ='Игры';
