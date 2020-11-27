@@ -11,7 +11,10 @@
     $sold = $_GET['sold'];
 
     // Выполнение запроса
-    $result = $mysqli->query("INSERT INTO games SET name='$name', genre='$genre', developer='$developer', publisher='$publisher', sold ='$sold'");
+    $result = $mysqli->query("INSERT INTO games
+        SET name='$name', genre='$genre', developer='$developer',
+        publisher='$publisher', sold ='$sold'"
+    );
 
     // если нет ошибок при выполнении запроса
     if ($result){
@@ -20,6 +23,5 @@
     else{
         print "<p>Ошибка сохранения.";
     }
-
-    print "<p><a href='games.php'> Вернуться к списку игр </a>";
 ?>
+<p><a href='games.php'> Вернуться к списку игр </a>

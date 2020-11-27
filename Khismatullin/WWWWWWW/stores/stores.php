@@ -15,9 +15,8 @@
             // Запрос на выборку сведений о пользователях
             $result = $mysqli->query("SELECT id, name, url FROM stores");
 
+            $counter=0;
             if ($result){
-                $counter=0;
-                // Для каждой строки из запроса
                 while ($row = $result->fetch_array()){
                     $id = $row['id'];
                     $name = $row['name'];
@@ -32,12 +31,10 @@
                     echo "<td><a href='delete.php?id=$id'>Удалить</a></td>";
                     echo "</tr>";
                 }
-                print "</table>";
-                print("<p>Всего магазинов: $counter </p>");
             }
-
-            print("<p> <a href='new.php'> Добавить магазин </a> </p>");
+            print "</table>";
+            print("<p>Всего магазинов: $counter </p>");
         ?>
-
-        <p> <a href='../index.php'> Вернуться в меню </a> </p>
+    <p> <a href='new.php'> Добавить магазин </a> </p>
+    <p> <a href='../index.php'> Вернуться в меню </a> </p>
 </html>

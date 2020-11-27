@@ -16,7 +16,6 @@
                 echo "<br>Игра: <select name='game_id'>";
 
                 if ($result){
-                    // Для каждой строки из запроса
                     while ($row = $result->fetch_array()){
                         $id = $row['id'];
                         $name = $row['name'];
@@ -31,7 +30,6 @@
                 echo "<br>Магазин: <select name='store_id'>";
 
                 if ($result){
-                    // Для каждой строки из запроса
                     while ($row = $result->fetch_array()){
                         $id = $row['id'];
                         $name = $row['name'];

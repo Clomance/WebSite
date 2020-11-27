@@ -14,16 +14,18 @@
             $publisher = $_GET['publisher'];
             $sold = $_GET['sold'];
 
-            $zapros="UPDATE games SET name='$name', genre='$genre', developer='$developer', publisher='$publisher', sold='$sold' WHERE id='$id'";
+            $result = $mysqli->query("UPDATE games
+                SET name='$name', genre='$genre', developer='$developer',
+                publisher='$publisher', sold='$sold' WHERE id='$id'"
+            );
 
-            $result = $mysqli->query($zapros);
-
-            if ($result) {
-                echo 'Все сохранено. <a href="games.php"> Вернуться к списку игр </a>';
+            if ($result){
+                echo 'Все сохранено.';
             }
-            else { 
-                echo 'Ошибка сохранения. <a href="games.php"> Вернуться к списку игр</a>'; 
+            else{
+                echo 'Ошибка сохранения.';
             }
         ?>
+        <a href="games.php"> Вернуться к списку игр</a>
     </body>
 </html>

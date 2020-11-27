@@ -16,22 +16,21 @@
                     stores.name as store_name, stores.id as store_id,
                     game_keys.price, game_keys.key_code FROM game_keys
                     LEFT JOIN games ON game_keys.game_id=games.id
-                    LEFT JOIN stores ON game_keys.store_id=stores.id"
+                    LEFT JOIN stores ON game_keys.store_id=stores.id
+                    WHERE game_keys.id=$key_id"
                 );
 
-                if ($result){
-                    while ($st = $result->fetch_array()) {
-                        $purchase_date = $st['purchase_date'];
-                        $expiry_date = $st['expiry_date'];
+                if ($result && $st = $result->fetch_array()){
+                    $purchase_date = $st['purchase_date'];
+                    $expiry_date = $st['expiry_date'];
 
-                        $game_name = $st['game_name'];
-                        $game_id = $st['game_id'];
-                        $store_name = $st['store_name'];
-                        $store_id = $st['store_id'];
+                    $game_name = $st['game_name'];
+                    $game_id = $st['game_id'];
+                    $store_name = $st['store_name'];
+                    $store_id = $st['store_id'];
 
-                        $price = $st['price'];
-                        $key_code = $st['key_code'];
-                    }
+                    $price = $st['price'];
+                    $key_code = $st['key_code'];
                 }
 
                 // Создание формы

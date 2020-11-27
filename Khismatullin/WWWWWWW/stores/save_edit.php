@@ -13,12 +13,13 @@
 
             $result = $mysqli->query("UPDATE stores SET name='$name', url='$url' WHERE id='$id'");
 
-            if ($result) {
-                echo 'Все сохранено. <a href="stores.php"> Вернуться к списку игр </a>';
+            if ($result){
+                echo 'Все сохранено.';
             }
-            else { 
-                echo 'Ошибка сохранения. <a href="stores.php"> Вернуться к списку игр</a>'; 
+            else{
+                echo 'Ошибка сохранения.'; 
             }
         ?>
+        <a href="stores.php"> Вернуться к списку игр </a>
     </body>
 </html>

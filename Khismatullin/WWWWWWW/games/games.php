@@ -16,9 +16,8 @@
             // Запрос на выборку сведений о пользователях
             $result = $mysqli->query("SELECT id, name, genre, developer, publisher, sold FROM games");
 
+            $counter=0;
             if ($result){
-                $counter=0;
-                // Для каждой строки из запроса
                 while ($row = $result->fetch_array()){
                     $id = $row['id'];
                     $name = $row['name'];
@@ -27,20 +26,18 @@
                     $publisher = $row['publisher'];
                     $sold = $row['sold'];
 
-                    $counter++;
-
                     echo "<tr>";
                     echo "<td>$name</td><td>$genre</td><td>$developer</td><td>$publisher</td><td>$sold</td>";
                     echo "<td><a href='edit.php?id=$id'>Редактировать</a></td>";
                     echo "<td><a href='delete.php?id=$id'>Удалить</a></td>";
                     echo "</tr>";
+
+                    $counter++;
                 }
-                print "</table>";
-                print("<p>Всего игр: $counter </p>");
             }
-
-            print("<p> <a href='new.php'> Добавить игру </a> </p>");
+            print "</table>";
+            print("<p>Всего игр: $counter </p>");
         ?>
-
+        <p> <a href='new.php'> Добавить игру </a> </p>
         <p> <a href='../index.php'> Вернуться в меню </a> </p>
 </html>

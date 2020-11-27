@@ -12,7 +12,11 @@
     $key_code = $_GET['key_code'];
 
     // Выполнение запроса
-    $result = $mysqli->query("INSERT INTO game_keys SET purchase_date='$purchase_date', expiry_date='$expiry_date', game_id='$game_id', store_id='$store_id', price='$price', key_code ='$key_code'");
+    $result = $mysqli->query("INSERT INTO game_keys
+        SET purchase_date='$purchase_date', expiry_date='$expiry_date',
+        game_id='$game_id', store_id='$store_id',
+        price='$price', key_code ='$key_code'"
+    );
 
     // если нет ошибок при выполнении запроса
     if ($result){
@@ -21,6 +25,5 @@
     else{
         print "<p>Ошибка сохранения.";
     }
-
-    print "<p><a href='game_keys.php'> Вернуться к списку ключей </a>";
 ?>
+<p><a href='game_keys.php'> Вернуться к списку ключей </a>

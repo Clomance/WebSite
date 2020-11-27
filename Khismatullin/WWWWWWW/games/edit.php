@@ -12,14 +12,12 @@
 
                 $result = $mysqli->query("SELECT name, genre, developer, publisher, sold FROM games WHERE id='$id'");
 
-                if ($result){
-                    while ($st = $result->fetch_array()) {
-                        $name = $st['name'];
-                        $genre = $st['genre'];
-                        $developer = $st['developer'];
-                        $publisher = $st['publisher'];
-                        $sold = $st['sold'];
-                    }
+                if ($result && $st = $result->fetch_array()){
+                    $name = $st['name'];
+                    $genre = $st['genre'];
+                    $developer = $st['developer'];
+                    $publisher = $st['publisher'];
+                    $sold = $st['sold'];
                 }
 
                 print "Название: <input name='name' size='50' type='text' value='$name'>";
