@@ -46,6 +46,6 @@
                 <input name="b2" type="reset" value="Очистить">
             </p>
         </form>
-        <p> <a href="game_keys.php"> Вернуться к списку ключей </a> </p>
+        <p><button style='color: blue' onclick="window.location.href='game_keys.php'">Вернуться к списку ключей</button></td></p>
     </body>
 </html>

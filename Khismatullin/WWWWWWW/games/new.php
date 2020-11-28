@@ -14,6 +14,6 @@
                 <input name="b2" type="reset" value="Очистить">
             </p>
         </form>
-        <p> <a href="games.php"> Вернуться к списку игр </a> </p>
+        <p><button style='color: blue' onclick="window.location.href='games.php'">Вернуться к списку игр</button></td></p>
     </body>
 </html>

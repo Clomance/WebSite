@@ -1,5 +1,5 @@
 <html>
-    <head> <title> Редактирование данных о планете </title> </head>
+    <head> <title> Редактирование данных о магазине </title> </head>
     <body>
         <form action='save_edit.php' metod='get'>
             <?php
@@ -24,7 +24,7 @@
                 print "<input type='hidden' name='id' size='30' value='$id'>";
             ?>
             <p><input type='submit' name='save' value='Сохранить'></p>
-            <p><a href='stores.php'> Вернуться к списку магазинов </a>
         </form>
+        <p><button style='color: blue' onclick="window.location.href='stores.php'">Вернуться к списку магазинов</button></td></p>
     </body>
 </html>

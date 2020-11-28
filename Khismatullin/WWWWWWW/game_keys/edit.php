@@ -1,5 +1,5 @@
 <html>
-    <head> <title> Редактирование данных о планете </title> </head>
+    <head> <title> Редактирование данных о ключе </title> </head>
     <body>
         <form action='save_edit.php' metod='get'>
             <?php
@@ -72,6 +72,6 @@
             ?>
             <p><input type='submit' name='save' value='Сохранить'></p>
         </form>
-        <p><a href='game_keys.php'> Вернуться к списку ключей </a>
+        <p><button style='color: blue' onclick="window.location.href='game_keys.php'">Вернуться к списку ключей</button></td></p>
     </body>
 </html>

@@ -1,7 +1,7 @@
 <html>
-    <head> <title> Добавление новой игры </title> </head>
+    <head> <title> Добавление нового магазина </title> </head>
     <body>
-        <H2>Добавление новой игры:</H2>
+        <H2>Добавление нового магазина:</H2>
         <form action="save_new.php" metod="get">
             Название: <input name="name" size="50" type="text">
             <br>Адрес: <input name="url" size="20" type="text">
@@ -11,6 +11,7 @@
                 <input name="b2" type="reset" value="Очистить">
             </p>
         </form>
-        <p> <a href="stores.php"> Вернуться к списку игр </a> </p>
+
+        <p><button style='color: blue' onclick="window.location.href='stores.php'">Вернуться к списку магазинов</button></td></p>
     </body>
 </html>
