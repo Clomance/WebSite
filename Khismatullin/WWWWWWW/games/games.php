@@ -5,7 +5,7 @@
     <table border="1">
         <tr>
             <th> Название </th> <th> Жанр </th> <th> Разработчик </th>
-            <th> Издатель </th> <th> Продано </th> <th> Редактировать </th> <th> Уничтожить </th>
+            <th> Издатель </th> <th> Продано </th>
         </tr>
         <?php
             $mysqli = new mysqli("eu-cdbr-west-03.cleardb.net", "be979b4b739385", "67d2bc8a", "heroku_59a01e27452dafc");
@@ -28,8 +28,8 @@
 
                     echo "<tr>";
                     echo "<td>$name</td><td>$genre</td><td>$developer</td><td>$publisher</td><td>$sold</td>";
-                    echo "<td><a href='edit.php?id=$id'>Редактировать</a></td>";
-                    echo "<td><a href='delete.php?id=$id'>Удалить</a></td>";
+                    echo "<td><button style='color: blue' onclick=\"window.location.href='edit.php?id=$id'\">Редактировать</button></td>";
+                    echo "<td><button style='color: blue' onclick=\"window.location.href='delete.php?id=$id'\">Удалить</button></td>";
                     echo "</tr>";
 
                     $counter++;
@@ -38,6 +38,6 @@
             print "</table>";
             print("<p>Всего игр: $counter </p>");
         ?>
-        <p> <a href='new.php'> Добавить игру </a> </p>
-        <p> <a href='../index.php'> Вернуться в меню </a> </p>
+    <button style='color: blue' onclick="window.location.href='new.php'">Добавить ключ</button></td>
+    <button style='color: blue' onclick="window.location.href='../index.php'">Вернуться в меню</button></td>
 </html>
