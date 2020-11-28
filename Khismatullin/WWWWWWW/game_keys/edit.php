@@ -23,12 +23,10 @@
                 if ($result && $st = $result->fetch_array()){
                     $purchase_date = $st['purchase_date'];
                     $expiry_date = $st['expiry_date'];
-
                     $game_name = $st['game_name'];
                     $game_id = $st['game_id'];
                     $store_name = $st['store_name'];
                     $store_id = $st['store_id'];
-
                     $price = $st['price'];
                     $key_code = $st['key_code'];
                 }
@@ -72,7 +70,7 @@
                 print "<br>Код активации: <input type='text' name='key_code' size='20' value='$key_code'>";
                 print "<input type='hidden' name='id' size='30' value='$key_id'>";
             ?>
-            <input type='submit' name='save' value='Сохранить'>
+            <p><input type='submit' name='save' value='Сохранить'></p>
         </form>
         <p><a href='game_keys.php'> Вернуться к списку ключей </a>
     </body>

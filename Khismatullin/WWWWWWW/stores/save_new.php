@@ -10,12 +10,6 @@
     // Выполнение запроса
     $result = $mysqli->query("INSERT INTO stores SET name='$name', url='$url'");
 
-    // если нет ошибок при выполнении запроса
-    if ($result){
-        print "<p>Вы успешно внесли игру в базу данных.";
-    }
-    else{
-        print "<p>Ошибка сохранения.";
-    }
+    header("Location: stores.php");
+    exit;
 ?>
-<p><a href='stores.php'> Вернуться к списку магазинов. </a>

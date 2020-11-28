@@ -18,12 +18,6 @@
         price='$price', key_code ='$key_code'"
     );
 
-    // если нет ошибок при выполнении запроса
-    if ($result){
-        print "<p>Вы успешно внесли ключ в базу данных.";
-    }
-    else{
-        print "<p>Ошибка сохранения.";
-    }
+    header("Location: game_keys.php");
+    exit;
 ?>
-<p><a href='game_keys.php'> Вернуться к списку ключей </a>

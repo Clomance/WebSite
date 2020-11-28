@@ -16,12 +16,6 @@
         publisher='$publisher', sold ='$sold'"
     );
 
-    // если нет ошибок при выполнении запроса
-    if ($result){
-        print "<p>Вы успешно внесли игру в базу данных.";
-    }
-    else{
-        print "<p>Ошибка сохранения.";
-    }
+    header("Location: games.php");
+    exit;
 ?>
-<p><a href='games.php'> Вернуться к списку игр </a>
