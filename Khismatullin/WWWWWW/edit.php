@@ -20,7 +20,7 @@
                 }
             }
 
-            print "<form action='save_edit.php' metod='get'>";
+            print "<form action='save_edit.php' method='get'>";
             print "Название: <input name='new_name' size='50' type='text' value='$name'>";
             print "<br>Созвездие: <input name='constellation' size='20' type='text' value='$constellation'>";
             print "<br>Расстояние до Земли: <input name='distance' size='20' type='text' value='$distance'>";

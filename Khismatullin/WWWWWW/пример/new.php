@@ -2,7 +2,7 @@
     <head> <title> Добавление нового пользователя </title> </head>
     <body>
         <H2>Регистрация на сайте:</H2>
-        <form action="save_new.php" metod="get">
+        <form action="save_new.php" method="get">
             Имя: <input name="name" size="50" type="text">
             <br>Логин: <input name="login" size="20" type="text">
             <br>Пароль: <input name="password" size="20" type="password">

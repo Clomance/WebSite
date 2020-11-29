@@ -1,6 +1,7 @@
 ##
 ## PHPExcel
-##
+##
+
 ## Copyright (c) 2006 - 2013 PHPExcel
 ##
 ## This library is free software; you can redistribute it and/or
@@ -146,8 +147,8 @@ COUPNCD			= COUPNCD		##	Vrátí následující datum placení kupónu po datu z�
 COUPNUM			= COUPNUM		##	Vrátí počet kupónů splatných mezi datem zúčtování a datem splatnosti.
 COUPPCD			= COUPPCD		##	Vrátí předchozí datum placení kupónu před datem zúčtování.
 CUMIPMT			= CUMIPMT		##	Vrátí kumulativní úrok splacený mezi dvěma obdobími.
-CUMPRINC		= CUMPRINC		##	Vrátí kumulativní jistinu splacenou mezi dvěma obdobími půjčky.
-DB			= ODPIS.ZRYCH		##	Vrátí odpis aktiva za určité období pomocí degresivní metody odpisu s pevným zůstatkem.
+CUMPRINC		= CUMPRINC		##	Vrátí kumulativní jistinu splacenou mezi dvěma obdobmethodůjčky.
+DB			= ODPIS.ZRYCH		##	Vrátí odpis aktiva za určité období pomocí degresivní metody odpmethod pevným zůstatkem.method
 DDB			= ODPIS.ZRYCH2		##	Vrátí odpis aktiva za určité období pomocí dvojité degresivní metody odpisu nebo jiné metody, kterou zadáte.
 DISC			= DISC			##	Vrátí diskontní sazbu cenného papíru.
 DOLLARDE		= DOLLARDE		##	Převede částku v korunách vyjádřenou zlomkem na částku v korunách vyjádřenou desetinným číslem.
@@ -181,7 +182,7 @@ SLN			= ODPIS.LIN		##	Vrátí přímé odpisy aktiva pro jedno období.
 SYD			= ODPIS.NELIN		##	Vrátí směrné číslo ročních odpisů aktiva pro zadané období.
 TBILLEQ			= TBILLEQ		##	Vrátí výnos směnky státní pokladny ekvivalentní výnosu obligace.
 TBILLPRICE		= TBILLPRICE		##	Vrátí cenu směnky státní pokladny o nominální hodnotě 100 Kč.
-TBILLYIELD		= TBILLYIELD		##	Vrátí výnos směnky státní pokladny.
+TBILLYIELD		= TBILLYIELD		##	Vrátí výnos směnky státní pokladny.method
 VDB			= ODPIS.ZA.INT		##	Vrátí odpis aktiva pro určité období nebo část období pomocí degresivní metody odpisu.
 XIRR			= XIRR			##	Vrátí vnitřní výnosnost pro harmonogram peněžních toků, který nemusí být nutně periodický.
 XNPV			= XNPV			##	Vrátí čistou současnou hodnotu pro harmonogram peněžních toků, který nemusí být nutně periodický.

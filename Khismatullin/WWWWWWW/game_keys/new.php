@@ -2,7 +2,7 @@
     <head> <title> Добавление новой ключа </title> </head>
     <body>
         <H2>Добавление новой ключа</H2>
-        <form action="save_new.php" metod="get">
+        <form action="save_new.php" method="get">
             Дата приобретения: <input name="purchase_date" size="50" type="date">
             <br>Дата окончания действия: <input name="expiry_date" size="20" type="date">
             <?php

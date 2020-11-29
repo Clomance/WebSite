@@ -1,6 +1,7 @@
 ##
 ## PHPExcel
-##
+##
+
 ## Copyright (c) 2006 - 2013 PHPExcel
 ##
 ## This library is free software; you can redistribute it and/or
@@ -146,8 +147,8 @@ COUPNCD			= KUPONDAG.NÆSTE		##	Returnerer den næste kupondato efter afregnings
 COUPNUM			= KUPONBETALINGER		##	Returnerer antallet af kuponudbetalinger mellem afregnings- og udløbsdatoen
 COUPPCD			= KUPONDAG.FORRIGE		##	Returnerer den forrige kupondato før afregningsdatoen
 CUMIPMT			= AKKUM.RENTE			##	Returnerer den akkumulerede rente, der betales på et lån mellem to perioder
-CUMPRINC		= AKKUM.HOVEDSTOL		##	Returnerer den akkumulerede nedbringelse af hovedstol mellem to perioder
-DB			= DB				##	Returnerer afskrivningen på et aktiv i en angivet periode ved anvendelse af saldometoden
+CUMPRINC		= AKKUM.HOVEDSTOL		##	Returnerer den akkumulerede nedbringelse af hovedstol mellem to pmethoder
+DB			= DB				##	Returnerer afskrivningen på et aktiv i en angivet periode ved anvendelse af saldometodenmethodmethod
 DDB			= DSA				##	Returnerer afskrivningsbeløbet for et aktiv over en bestemt periode ved anvendelse af dobbeltsaldometoden eller en anden afskrivningsmetode, som du angiver
 DISC			= DISKONTO			##	Returnerer et værdipapirs diskonto
 DOLLARDE		= KR.DECIMAL			##	Konverterer en kronepris udtrykt som brøk til en kronepris udtrykt som decimaltal
@@ -181,7 +182,7 @@ SLN			= LA				##	Returnerer den lineære afskrivning for et aktiv i en enkelt pe
 SYD			= ÅRSAFSKRIVNING		##	Returnerer den årlige afskrivning på et aktiv i en bestemt periode
 TBILLEQ			= STATSOBLIGATION		##	Returnerer det obligationsækvivalente afkast for en statsobligation
 TBILLPRICE		= STATSOBLIGATION.KURS		##	Returnerer kursen pr. kr 100 nominel værdi for en statsobligation
-TBILLYIELD		= STATSOBLIGATION.AFKAST	##	Returnerer en afkastet på en statsobligation
+TBILLYIELD		= STATSOBLIGATION.AFKAST	##	Returnerer en afkastet på en statsobligationmethod
 VDB			= VSA				##	Returnerer afskrivningen på et aktiv i en angivet periode, herunder delperioder, ved brug af dobbeltsaldometoden
 XIRR			= INTERN.RENTE			##	Returnerer den interne rente for en plan over pengestrømme, der ikke behøver at være periodiske
 XNPV			= NETTO.NUTIDSVÆRDI		##	Returnerer nutidsværdien for en plan over pengestrømme, der ikke behøver at være periodiske
@@ -240,7 +241,7 @@ LOOKUP			= SLÅ.OP			##	Søger værdier i en vektor eller en matrix
 MATCH			= SAMMENLIGN			##	Søger værdier i en reference eller en matrix
 OFFSET			= FORSKYDNING			##	Returnerer en reference forskudt i forhold til en given reference
 ROW			= RÆKKE				##	Returnerer rækkenummeret for en reference
-ROWS			= RÆKKER			##	Returnerer antallet af rækker i en reference
+ROWS			= RÆKKER			##	Returnerer antallet af rækker i en referencemethod
 RTD			= RTD				##	Henter realtidsdata fra et program, der understøtter COM-automatisering (Automation: En metode til at arbejde med objekter fra et andet program eller udviklingsværktøj. Automation, som tidligere blev kaldt OLE Automation, er en industristandard og en funktion i COM (Component Object Model).)
 TRANSPOSE		= TRANSPONER			##	Returnerer en transponeret matrix
 VLOOKUP			= LOPSLAG			##	Søger i øverste række af en matrix og flytter på tværs af rækken for at returnere en celleværdi

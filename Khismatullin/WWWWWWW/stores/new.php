@@ -2,7 +2,7 @@
     <head> <title> Добавление нового магазина </title> </head>
     <body>
         <H2>Добавление нового магазина:</H2>
-        <form action="save_new.php" metod="get">
+        <form action="save_new.php" method="get">
             Название: <input name="name" size="50" type="text">
             <br>Адрес: <input name="url" size="20" type="text">
 

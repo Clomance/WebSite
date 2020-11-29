@@ -1,6 +1,7 @@
 ##
 ## PHPExcel
-##
+##
+
 ## Copyright (c) 2006 - 2013 PHPExcel
 ##
 ## This library is free software; you can redistribute it and/or
@@ -146,8 +147,8 @@ COUPNCD			= COUPNCD			##	Zwraca dzień następnej dywidendy po dniu rozliczeniow
 COUPNUM			= COUPNUM			##	Zwraca liczbę dywidend płatnych między dniem rozliczeniowym a dniem wykupu.
 COUPPCD			= COUPPCD			##	Zwraca dzień poprzedniej dywidendy przed dniem rozliczeniowym.
 CUMIPMT			= CUMIPMT			##	Zwraca wartość procentu składanego płatnego między dwoma okresami.
-CUMPRINC		= CUMPRINC			##	Zwraca wartość kapitału skumulowanego spłaty pożyczki między dwoma okresami.
-DB			= DB				##	Zwraca amortyzację środka trwałego w danym okresie metodą degresywną z zastosowaniem stałej bazowej.
+CUMPRINC		= CUMPRINC			##	Zwraca wartość kapitału skumulowanego spłmethodożyczki między dwoma okresami.
+DB			= DB				##	Zwraca amortyzację środka trwałego w danym okresie memethoddegresywną z zastosowaniem stałej bazowej.method
 DDB			= DDB				##	Zwraca amortyzację środka trwałego za podany okres metodą degresywną z zastosowaniem podwójnej bazowej lub metodą określoną przez użytkownika.
 DISC			= DISC				##	Zwraca wartość stopy dyskontowej papieru wartościowego.
 DOLLARDE		= DOLLARDE			##	Konwertuje cenę w postaci ułamkowej na cenę wyrażoną w postaci dziesiętnej.
@@ -176,12 +177,12 @@ PRICEDISC		= PRICEDISC			##	Zwraca cenę za 100 zł wartości nominalnej papieru
 PRICEMAT		= PRICEMAT			##	Zwraca cenę za 100 zł wartości nominalnej papieru wartościowego z oprocentowaniem w terminie wykupu.
 PV			= PV				##	Zwraca wartość bieżącą lokaty.
 RATE			= RATE				##	Zwraca wysokość stopy procentowej w okresie raty rocznej.
-RECEIVED		= RECEIVED			##	Zwraca wartość kapitału otrzymanego przy wykupie papieru wartościowego całkowicie ulokowanego.
-SLN			= SLN				##	Zwraca amortyzację środka trwałego za jeden okres metodą liniową.
+RECEIVED		= RECEIVED			##	Zwraca wartość kapitału otrzymanego przy wmethode papieru wartościowego całkowicie ulokowanego.
+SLN			= SLN				##	Zwraca amortyzację środka trwałego za jeden okresmethoddą liniową.
 SYD			= SYD				##	Zwraca amortyzację środka trwałego za dany okres metodą sumy cyfr lat amortyzacji.
 TBILLEQ			= TBILLEQ			##	Zwraca rentowność ekwiwalentu obligacji dla bonu skarbowego.
 TBILLPRICE		= TBILLPRICE			##	Zwraca cenę za 100 zł wartości nominalnej bonu skarbowego.
-TBILLYIELD		= TBILLYIELD			##	Zwraca rentowność bonu skarbowego.
+TBILLYIELD		= TBILLYIELD			##	Zwraca rentowność bonu skarbowego.method
 VDB			= VDB				##	Oblicza amortyzację środka trwałego w danym okresie lub jego części metodą degresywną.
 XIRR			= XIRR				##	Zwraca wartość wewnętrznej stopy zwrotu dla serii rozłożonych w czasie przepływów gotówkowych, niekoniecznie okresowych.
 XNPV			= XNPV				##	Zwraca wartość bieżącą netto dla serii rozłożonych w czasie przepływów gotówkowych, niekoniecznie okresowych.

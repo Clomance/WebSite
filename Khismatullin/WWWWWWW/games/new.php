@@ -2,7 +2,7 @@
     <head> <title> Добавление новой игры </title> </head>
     <body>
         <H2>Добавление новой игры:</H2>
-        <form action="save_new.php" metod="get">
+        <form action="save_new.php" method="get">
             Название: <input name="name" size="50" type="text">
             <br>Жанр: <input name="genre" size="20" type="text">
             <br>Разработчик: <input name="developer" size="20" type="text">

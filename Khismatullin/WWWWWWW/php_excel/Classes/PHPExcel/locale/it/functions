@@ -1,6 +1,7 @@
 ##
 ## PHPExcel
-##
+##
+
 ## Copyright (c) 2006 - 2013 PHPExcel
 ##
 ## This library is free software; you can redistribute it and/or
@@ -146,8 +147,8 @@ COUPNCD			= DATA.CED.SUCC			##	Restituisce un numero che rappresenta la data del
 COUPNUM			= NUM.CED			##	Restituisce il numero di cedole pagabili fra la data di liquidazione e la data di scadenza
 COUPPCD			= DATA.CED.PREC			##	Restituisce un numero che rappresenta la data della cedola precedente alla data di liquidazione
 CUMIPMT			= INT.CUMUL			##	Restituisce l'interesse cumulativo pagato fra due periodi
-CUMPRINC		= CAP.CUM			##	Restituisce il capitale cumulativo pagato per estinguere un debito fra due periodi
-DB			= DB				##	Restituisce l'ammortamento di un bene per un periodo specificato utilizzando il metodo di ammortamento a quote fisse decrescenti
+CUMPRINC		= CAP.CUM			##	Restituisce il capitale cumulativo pagato per estinguere un debito fra methoderiodi
+DB			= DB				##	Restituisce l'ammortamento di un bene per un periodo specificato utilizzando il metomethod ammortamento a quote fisse decrescentimethod
 DDB			= AMMORT			##	Restituisce l'ammortamento di un bene per un periodo specificato utilizzando il metodo di ammortamento a doppie quote decrescenti o altri metodi specificati
 DISC			= TASSO.SCONTO			##	Restituisce il tasso di sconto per un titolo
 DOLLARDE		= VALUTA.DEC			##	Converte un prezzo valuta, espresso come frazione, in prezzo valuta, espresso come numero decimale
@@ -181,7 +182,7 @@ SLN			= AMMORT.COST			##	Restituisce l'ammortamento a quote costanti di un bene 
 SYD			= AMMORT.ANNUO			##	Restituisce l'ammortamento a somma degli anni di un bene per un periodo specificato
 TBILLEQ			= BOT.EQUIV			##	Restituisce il rendimento equivalente ad un'obbligazione per un Buono ordinario del Tesoro
 TBILLPRICE		= BOT.PREZZO			##	Restituisce il prezzo di un Buono del Tesoro dal valore nominale di € 100
-TBILLYIELD		= BOT.REND			##	Restituisce il rendimento di un Buono del Tesoro
+TBILLYIELD		= BOT.REND			##	Restituisce il rendimento di un Buono del Tesoromethod
 VDB			= AMMORT.VAR			##	Restituisce l'ammortamento di un bene per un periodo specificato o parziale utilizzando il metodo a doppie quote proporzionali ai valori residui
 XIRR			= TIR.X				##	Restituisce il tasso di rendimento interno di un impiego di flussi di cassa
 XNPV			= VAN.X				##	Restituisce il valore attuale netto di un impiego di flussi di cassa non necessariamente periodici
@@ -240,7 +241,7 @@ LOOKUP			= CERCA				##	Ricerca i valori in un vettore o in una matrice
 MATCH			= CONFRONTA			##	Ricerca i valori in un riferimento o in una matrice
 OFFSET			= SCARTO			##	Restituisce uno scarto di riferimento da un riferimento dato
 ROW			= RIF.RIGA			##	Restituisce il numero di riga di un riferimento
-ROWS			= RIGHE				##	Restituisce il numero delle righe in un riferimento
+ROWS			= RIGHE				##	Restituisce il numero delle righe in un riferimentomethod
 RTD			= DATITEMPOREALE		##	Recupera dati in tempo reale da un programma che supporta l'automazione COM (automazione: Metodo per utilizzare gli oggetti di un'applicazione da un'altra applicazione o da un altro strumento di sviluppo. Precedentemente nota come automazione OLE, l'automazione è uno standard del settore e una caratteristica del modello COM (Component Object Model).)
 TRANSPOSE		= MATR.TRASPOSTA		##	Restituisce la trasposizione di una matrice
 VLOOKUP			= CERCA.VERT			##	Effettua una ricerca nella prima colonna di una matrice e si sposta attraverso la riga per restituire il valore di una cella

@@ -1,6 +1,7 @@
 ##
 ## PHPExcel
-##
+##
+
 ## Copyright (c) 2006 - 2013 PHPExcel
 ##
 ## This library is free software; you can redistribute it and/or
@@ -147,7 +148,7 @@ COUPNUM			= OBLIG.ANTALL				##	Returnerer antall obligasjoner som skal betales m
 COUPPCD			= OBLIG.DAG.FORRIGE			##	Returnerer obligasjonsdatoen som kommer før oppgjørsdatoen
 CUMIPMT			= SAMLET.RENTE				##	Returnerer den kumulative renten som er betalt mellom to perioder
 CUMPRINC		= SAMLET.HOVEDSTOL			##	Returnerer den kumulative hovedstolen som er betalt for et lån mellom to perioder
-DB			= DAVSKR				##	Returnerer avskrivningen for et aktivum i en angitt periode, foretatt med fast degressiv avskrivning
+DB			= DAVSKR				##	Returnerer avskrivningen for et aktivum i en angitt periode, foretatt med fast degressiv avskrivningmethod
 DDB			= DEGRAVS				##	Returnerer avskrivningen for et aktivum for en gitt periode, ved hjelp av dobbel degressiv avskrivning eller en metode som du selv angir
 DISC			= DISKONTERT				##	Returnerer diskonteringsraten for et verdipapir
 DOLLARDE		= DOLLARDE				##	Konverterer en valutapris uttrykt som en brøk, til en valutapris uttrykt som et desimaltall

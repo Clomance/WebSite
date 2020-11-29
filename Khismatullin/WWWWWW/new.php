@@ -2,7 +2,7 @@
     <head> <title> Добавление новой планеты </title> </head>
     <body>
         <H2>Добавление новой планеты:</H2>
-        <form action="save_new.php" metod="get">
+        <form action="save_new.php" method="get">
             Название: <input name="name" size="50" type="text">
             <br>Созвездие: <input name="constellation" size="20" type="text">
             <br>Расстояние до Земли: <input name="distance" size="20" type="text">

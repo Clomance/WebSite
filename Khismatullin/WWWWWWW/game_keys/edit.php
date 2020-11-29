@@ -1,7 +1,7 @@
 <html>
     <head> <title> Редактирование данных о ключе </title> </head>
     <body>
-        <form action='save_edit.php' metod='get'>
+        <form action='save_edit.php' method='get'>
             <?php
                 $mysqli = new mysqli("eu-cdbr-west-03.cleardb.net", "be979b4b739385", "67d2bc8a", "heroku_59a01e27452dafc");
                 if ($mysqli->connect_errno) {

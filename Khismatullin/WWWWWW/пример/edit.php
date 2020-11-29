@@ -20,7 +20,7 @@
                 }
             }
 
-            print "<form action='save_edit.php' metod='get'>";
+            print "<form action='save_edit.php' method='get'>";
             print "Имя: <input name='name' size='50' type='text' value='$name'>";
             print "<br>Логин: <input name='new_login' size='20' type='text' value='$login'>";
             print "<br>Пароль: <input name='password' size='20' type='text' value='$password'>";
