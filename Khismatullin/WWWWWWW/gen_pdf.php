@@ -49,6 +49,9 @@
             $pdf->Cell($w[1],$h,$row[0],'LRB');
 
             for ($c = 2; $c < 9; $c++){
+                if ($c==6 || $c==7){
+                    $row[$c-1] = date('d-m-Y', strtotime($row[$c-1]));
+                }
                 $pdf->Cell($w[$c],$h,$row[$c-1],'RB');
             }
             $pdf->Ln();
