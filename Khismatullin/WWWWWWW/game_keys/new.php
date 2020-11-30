@@ -3,8 +3,8 @@
     <body>
         <H2>Добавление новой ключа</H2>
         <form action="save_new.php" method="get">
-            Дата приобретения: <input name="purchase_date" size="50" type="date">
-            <br>Дата окончания действия: <input name="expiry_date" size="20" type="date">
+            Дата приобретения: <input name="purchase_date" size="50" placeholder="dd-mm-yyyy" type="date">
+            <br>Дата окончания действия: <input name="expiry_date" size="20" placeholder="dd-mm-yyyy" type="date">
             <?php
                 $mysqli = new mysqli("eu-cdbr-west-03.cleardb.net", "be979b4b739385", "67d2bc8a", "heroku_59a01e27452dafc");
                 if ($mysqli->connect_errno) {

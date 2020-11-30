@@ -32,8 +32,8 @@
                 }
 
                 // Создание формы
-                print "Дата приобретения: <input name='purchase_date' size='50' type='date' value='$purchase_date'>";
-                print "Дата окончания действия: <input name='expiry_date' size='50' type='date' value='$expiry_date'>";
+                print "Дата приобретения: <input name='purchase_date' size='50' type='date' placeholder='dd-mm-yyyy' value='$purchase_date'>";
+                print "Дата окончания действия: <input name='expiry_date' size='50' type='date' placeholder='dd-mm-yyyy' value='$expiry_date'>";
 
                 // Получение данных об играх
                 $result = $mysqli->query("SELECT id, name FROM games WHERE id<>$game_id");

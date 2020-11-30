@@ -31,6 +31,9 @@
                     $price = $row['price'];
                     $key_code = $row['key_code'];
 
+                    $purchase_date = date('d-m-Y', strtotime($purchase_date));
+                    $expiry_date = date('d-m-Y', strtotime($expiry_date));
+
                     echo "<tr>";
                     echo "<td>$purchase_date</td><td>$expiry_date</td><td>$game</td><td>$store</td><td>$price</td><td>$key_code</td>";
                     echo "<td><button style='color: blue' onclick=\"window.location.href='edit.php?id=$id'\">Редактировать</button></td>";
