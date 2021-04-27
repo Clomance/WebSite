@@ -2,7 +2,7 @@
     <body align="center">
         <meta charset = "UTF-8">
 
-        <p><h1>Гейский калькулятор</h1></p>
+        <p><h1>Гейский калькулятор (На стадии разработки)</h1></p>
 
         <p>
             <button onclick="window.location.href='https://vk.com/pi318?w=wall-173344893_696'"><img src="gay_calc.png"></button>
@@ -12,8 +12,8 @@
             <table align="center">
                 <tr>
                     <td><textarea cols="80" id="intext" style="border:lightblue; border-width:2px; border-style:solid;" readonly="readonly"></textarea></td>
-                    <td><img src="buttons/arr.png"></td>
-                    <td><img src="buttons/clear.png"></td>
+                    <td><img src="buttons/arr.png" onclick="delete_symbol();"></td>
+                    <td><img src="buttons/clear.png" onclick="clear_symbols();"></td>
                 </tr>
             </table>
         </p>
@@ -21,26 +21,26 @@
         <p>
             <table border="1" align="center">
                 <tr>
-                    <td><img src="buttons/7.png"></td>
-                    <td><img src="buttons/8.png"></td>
-                    <td><img src="buttons/9.png" onclick="clicked();"></td>
+                    <td><img src="buttons/7.png" onclick="clicked(7);"></td>
+                    <td><img src="buttons/8.png" onclick="clicked(8);"></td>
+                    <td><img src="buttons/9.png" onclick="clicked(9);"></td>
                     <td><img src="buttons/mul.png"></td>
                 </tr>
                 <tr>
-                    <td><img src="buttons/4.png"></td>
-                    <td><img src="buttons/5.png"></td>
-                    <td><img src="buttons/6.png"></td>
+                    <td><img src="buttons/4.png" onclick="clicked(4);"></td>
+                    <td><img src="buttons/5.png" onclick="clicked(5);"></td>
+                    <td><img src="buttons/6.png" onclick="clicked(6);"></td>
                     <td><img src="buttons/div.png"></td>
                 </tr>
                 <tr>
-                    <td><img src="buttons/1.png"></td>
-                    <td><img src="buttons/2.png"></td>
-                    <td><img src="buttons/3.png"></td>
+                    <td><img src="buttons/1.png" onclick="clicked(9);"></td>
+                    <td><img src="buttons/2.png" onclick="clicked(2);"></td>
+                    <td><img src="buttons/3.png" onclick="clicked(3);"></td>
                     <td><img src="buttons/min.png"></td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td><img src="buttons/0.png"></td>
+                    <td><img src="buttons/0.png" onclick="clicked(0);"></td>
                     <td><img src="buttons/eq.png"></td>
                     <td><img src="buttons/sum.png"></td>
                 </tr>
@@ -48,8 +48,18 @@
         </p>
 
         <script language="JavaScript">
-            function clicked(){
-                document.getElementById("intext").innerHTML="1";
+            var saved_line="";
+
+            function clicked(arg){
+                document.getElementById("intext").innerHTML+= arg;
+            }
+
+            function clear_symbols(){
+                document.getElementById("intext").innerHTML="";
+            }
+
+            function delete_symbol(){
+
             }
         </script>
     </body>
