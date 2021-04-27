@@ -1,0 +1,35 @@
+<html>
+    <body>
+        <meta charset = "UTF-8">
+
+        <p class="drag" style="position: absolute;">Text</p>
+
+        <img id="cat_engine_logo" class="drag" src="https://github.com/Clomance/CatEngine/raw/master/logo_400x400.png" style="position: absolute;">
+
+    </body>
+
+    <script language="JavaScript" src="../../jquery.js"></script>
+        <script language="JavaScript">
+            var picked = false;
+
+            $(".drag").mousedown(function(){
+                picked = true;
+            });
+
+            $(".drag").mouseup(function(){
+                picked = false;
+            });
+
+            $(".drag").mousemove(function(e){
+                if (picked){
+                    var x = e.pageX;
+                    var y = e.pageY;
+
+                    var width = $(".drag").width();
+                    var height = $(".drag").height();
+
+                    $(".drag").animate({left:String(x-width)+"px",top:String(y-height)+"px"},0);
+                }
+            });
+        </script>
+</html>
