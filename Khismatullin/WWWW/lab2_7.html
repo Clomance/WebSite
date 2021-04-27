@@ -1,15 +1,55 @@
 <html>
-    <body>
+    <body align="center">
         <meta charset = "UTF-8">
-        <table border="1">
-            <tr>
-                <td><button>1</button></td><button>1</button><td><button>1</button></td>
-            </tr>
-        </table>
+
+        <p><h1>Гейский калькулятор</h1></p>
+
+        <p>
+            <button onclick="window.location.href='https://vk.com/pi318?w=wall-173344893_696'"><img src="gay_calc.png"></button>
+        </p>
+
+        <p>
+            <table align="center">
+                <tr>
+                    <td><textarea cols="80" id="intext" style="border:lightblue; border-width:2px; border-style:solid;" readonly="readonly"></textarea></td>
+                    <td><img src="buttons/arr.png"></td>
+                    <td><img src="buttons/clear.png"></td>
+                </tr>
+            </table>
+        </p>
+
+        <p>
+            <table border="1" align="center">
+                <tr>
+                    <td><img src="buttons/7.png"></td>
+                    <td><img src="buttons/8.png"></td>
+                    <td><img src="buttons/9.png" onclick="clicked();"></td>
+                    <td><img src="buttons/mul.png"></td>
+                </tr>
+                <tr>
+                    <td><img src="buttons/4.png"></td>
+                    <td><img src="buttons/5.png"></td>
+                    <td><img src="buttons/6.png"></td>
+                    <td><img src="buttons/div.png"></td>
+                </tr>
+                <tr>
+                    <td><img src="buttons/1.png"></td>
+                    <td><img src="buttons/2.png"></td>
+                    <td><img src="buttons/3.png"></td>
+                    <td><img src="buttons/min.png"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><img src="buttons/0.png"></td>
+                    <td><img src="buttons/eq.png"></td>
+                    <td><img src="buttons/sum.png"></td>
+                </tr>
+            </table>
+        </p>
 
         <script language="JavaScript">
-            function arrays(){
-                
+            function clicked(){
+                document.getElementById("intext").innerHTML="1";
             }
         </script>
     </body>
