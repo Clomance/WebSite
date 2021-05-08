@@ -1,35 +1,43 @@
 <html>
     <body>
         <meta charset = "UTF-8">
-
-        <p class="drag" style="position: absolute;">Text</p>
-
-        <img id="cat_engine_logo" class="drag" src="https://github.com/Clomance/CatEngine/raw/master/logo_400x400.png" style="position: absolute;">
-
+        <img id="cat_engine_logo" class="drag" src="https://github.com/Clomance/CatEngine/raw/master/logo_400x400.png"
+            style="position: absolute;">
     </body>
 
     <script language="JavaScript" src="../../jquery.js"></script>
+
         <script language="JavaScript">
-            var picked = false;
+            var cat = document.getElementById('cat_engine_logo');
 
-            $(".drag").mousedown(function(){
-                picked = true;
-            });
+            cat.ondragstart = function() {
+                return false;
+            };
 
-            $(".drag").mouseup(function(){
-                picked = false;
-            });
+            cat.onmousedown = function(e){
+                var coords = getCoords(cat);
+                var shiftX = e.pageX - coords.left;
+                var shiftY = e.pageY - coords.top;
 
-            $(".drag").mousemove(function(e){
-                if (picked){
-                    var x = e.pageX;
-                    var y = e.pageY;
 
-                    var width = $(".drag").width();
-                    var height = $(".drag").height();
-
-                    $(".drag").animate({left:String(x-width)+"px",top:String(y-height)+"px"},0);
+                document.onmousemove = function(e) {
+                    cat.style.left = e.pageX - shiftX + 'px';
+                    cat.style.top = e.pageY - shiftY + 'px';
                 }
-            });
+
+                cat.onmouseup = function() {
+                    document.onmousemove = null;
+                    cat.onmouseup = null;
+                }
+            }
+
+            function getCoords(elem) {
+                var box = elem.getBoundingClientRect();
+                return {
+                    top: box.top + pageYOffset,
+                    left: box.left + pageXOffset
+                };
+            }
+
         </script>
 </html>
