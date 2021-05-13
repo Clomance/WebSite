@@ -17,12 +17,7 @@
 
     <script language="JavaScript" src="../../jquery.js"></script>
     <script language="JavaScript">
-        $.ajax({
-            type: "GET",
-            url: "get_reviews.php",
-            dataType: "html",
-            success: function(data){document.getElementById("all_reviews").innerHTML = data;}
-        });
+        get_reviews();
 
         function send_review() {
             var name = document.review_form.name.value;
@@ -38,10 +33,18 @@
                 dataType: "html",
                 success: function(data){
                     alert("Ваш обзор отправлен");
+                    get_reviews();
                 }
             });
         }
-        
+        function get_reviews() {
+            $.ajax({
+                type: "GET",
+                url: "get_reviews.php",
+                dataType: "html",
+                success: function(data){document.getElementById("all_reviews").innerHTML = data;}
+            });
+        }
         function length(str){
             var strIter = str[Symbol.iterator]();
             let str_lenght = 0;
