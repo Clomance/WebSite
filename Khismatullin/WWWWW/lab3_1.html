@@ -9,9 +9,7 @@
         </style>
     </head>
     <body>
-        <section id="news_body">
-            
-        </section>
+        <section id="news_body"></section>
         <input type="button" value="Подгрузить ещё новостей" onclick="upload();">
     </body>
 
@@ -23,50 +21,39 @@
         $(document).ready(upload());
 
         function upload() {
-            var load_news_url = "get_news.php?loaded=" + loaded + "&need_to_load=" + need_to_load;
-
             loaded += need_to_load;
-
             // Запрос
             $.ajax({
                 type: "GET",
-                url: load_news_url,
+                url: "get_news.php?loaded=" + loaded + "&need_to_load=" + need_to_load,
                 dataType: "html",
                 success: function(data){
-                    var news_body = document.getElementById("news_body");
-                    news_body.innerHTML += data;
+                    document.getElementById("news_body").innerHTML += data;
                 }
             });
         }
 
         function upload_comments(news_id) {
-            var load_comments_url = "get_comments.php?id="+news_id;
-
             // Запрос
             $.ajax({
                 type: "GET",
-                url: load_comments_url,
+                url: "get_comments.php?id="+news_id,
                 dataType: "html",
                 success: function(data){
-                    // Секция под новостью для комментариев
-                    var comment_section_id = "comments_"+news_id;
-                    var comment_section = document.getElementById(comment_section_id);
-                    // Запись полученных комментариев в секцию
-                    comment_section.innerHTML = data;
+                    // Запись полученных комментариев в секцию под новостью для комментариев
+                    document.getElementById("comments_"+news_id).innerHTML = data;
 
                     // Процедура для добавления комментария
                     var add_comment = "add_comment(" + news_id + ");";
 
                     // Секция для добавления комментириев (можно заменить формой)
-                    var add_comments_section_id = "add_comments_section_" + news_id;
-                    var add_comments_section = document.getElementById(add_comments_section_id);
+                    var add_comments_section = document.getElementById("add_comments_section_" + news_id);
                     // Добавление поля и кнопки для добавления комментириев
                     add_comments_section.innerHTML = "<input id='new_comment_"+news_id+"' type='text'>"
                      + "<input type='button' value='Добавить комментарии' onclick='" + add_comment + "'>";
 
                     // Переобувание кнопки загрузки комментариев в кнопку закрытия комментариев
-                    var comment_button_id = "comments_button_" + news_id;
-                    var comment_button = document.getElementById(comment_button_id);
+                    var comment_button = document.getElementById("comments_button_" + news_id);
                     comment_button.value = "Закрыть комментарии";
                     comment_button.onclick = function() {close_comments(news_id)};
                 }
@@ -74,21 +61,14 @@
         }
 
         function close_comments(news_id){
-            // Секция под новостью для комментариев
-            var comment_section_id = "comments_"+news_id;
-            var comment_section = document.getElementById(comment_section_id);
-            // Очистка секции
-            comment_section.innerHTML = "";
+            // Очистка секции под новостью для комментариев
+            document.getElementById("comments_"+news_id).innerHTML = "";
 
-            // Секция для добавления комментириев (можно заменить формой)
-            var add_comments_section_id = "add_comments_section_" + news_id;
-            var add_comments_section = document.getElementById(add_comments_section_id);
-            // Очистка секции
-            add_comments_section.innerHTML = "";
+            // Очистка секции для добавления комментириев (можно заменить формой)
+            document.getElementById("add_comments_section_" + news_id).innerHTML = "";
 
             // Переобувание кнопки закрытия комментариев в кнопку загрузки комментариев
-            var comment_button_id = "comments_button_" + news_id;
-            var comment_button = document.getElementById(comment_button_id);
+            var comment_button = document.getElementById("comments_button_" + news_id);
             comment_button.value = "Открыть комментарии";
             comment_button.onclick = function() {upload_comments(news_id)};
         }
@@ -101,12 +81,10 @@
             // Очистка поля
             comment_input.value = "";
 
-            var add_comment_url = "add_comment.php?id="+news_id+"&description="+comment;
-
             // Запрос
             $.ajax({
                 type: "GET",
-                url: add_comment_url,
+                url: "add_comment.php?id="+news_id+"&description="+comment,
                 dataType: "html",
                 success: function(data){
                     var comment_section_id = "comments_"+news_id;
@@ -117,4 +95,3 @@
         }
     </script>
 </html>
-

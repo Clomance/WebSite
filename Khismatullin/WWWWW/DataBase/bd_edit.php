@@ -1,7 +1,7 @@
 <html>
     <head> <title> Сведения о базе данных </title> </head>
     <h2> Таблицы </h2>
-    <table border = '1' >
+    <table border = '1' cellspacing = '0'>
         <tr>
             <th>Таблицы</th>
             <th>Поля</th>
@@ -25,7 +25,7 @@
                 while ($row = $result_tables->fetch_array()){
                     $table_name = $row[0];
 
-                    echo "<tr> <th>$table_name</th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> </tr>";
+                    echo "<tr> <th colspan = '1'>$table_name</th> </tr>";
 
                     $result_columns = $mysqli->query("SHOW COLUMNS FROM $table_name");
 
