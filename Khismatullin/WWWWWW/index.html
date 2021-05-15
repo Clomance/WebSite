@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <meta charset = "UTF-8">
+
+        <link rel="stylesheet" href="../../jquery-ui-1.12.1.custom/jquery-ui.min.css">
+        <script src="../../jquery-ui-1.12.1.custom/external/jquery/jquery.js"></script>
+        <script src="../../jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+
+        <style type="text/css">
+            /* Обои */
+            body {
+                background-image: url(starship_background.jpg);
+                background-position: left bottom;
+                background-repeat: repeat;
+            }
+
+            /* Обводка символов */
+            .header_outline{
+                font-size: 56px;
+                color: white;
+                text-shadow:
+                    -2px -2px 0 rgb(255, 0, 0),
+                    2px -2px 0 #000,
+                    -2px 2px 0 #000,
+                    2px 2px 0 #000;
+            }
+
+            .outline{
+                font-size: 26px;
+                color: white;
+                text-shadow:
+                    -1px -1px 0 #000,
+                    1px -1px 0 #000,
+                    -1px 1px 0 #000,
+                    1px 1px 0 #000;
+            }
+        </style>
+    </head>
+    <body>
+       <h1 class="header_outline">Супер-Мега-Классно-Невероятные космические корабли</h1>
+
+        <p ><section id="starships_list" class="outline">Пока здесь нет космических кораблей</section></p>
+
+        <p><button class="ui-button ui-widget ui-corner-all" onclick="window.location.href='create_starship.html'">Создать собственный</button></p>
+
+        <script language="JavaScript">
+            // При загрузке страницы
+            $(document).ready(upload());
+
+            function upload() {
+                // Запрос
+                $.ajax({
+                    type: "GET",
+                    url: "get_news.php?loaded=" + loaded + "&need_to_load=" + need_to_load,
+                    dataType: "html",
+                    success: function(data){
+                        document.getElementById("starships_list").innerHTML = data;
+                    }
+                });
+            }
+        </script>
+    </body>
+</html>

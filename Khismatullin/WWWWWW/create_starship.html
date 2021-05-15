@@ -1,0 +1,258 @@
+<html>
+    <head>
+        <meta charset = "UTF-8">
+        <link rel="stylesheet" href="../../jquery-ui-1.12.1.custom/jquery-ui.css">
+        <script src="../../jquery-ui-1.12.1.custom/external/jquery/jquery.js"></script>
+        <script src="../../jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+
+        <style type="text/css">
+            /* Обои */
+            body {
+                background-image: url(starship_background.jpg);
+                background-position: left bottom;
+                background-repeat: repeat;
+            }
+
+            /* Обводка символов в заголовке */
+            .header_outline{
+                font-size: 56px;
+                color: white;
+                text-shadow:
+                    -2px -2px 0 rgb(255, 0, 0),
+                    2px -2px 0 #000,
+                    -2px 2px 0 #000,
+                    2px 2px 0 #000;
+            }
+
+            .table_header_outline{
+                font-size: 46px;
+                color: white;
+                text-shadow:
+                    -2px -2px 0 rgb(255, 0, 0),
+                    2px -2px 0 #000,
+                    -2px 2px 0 #000,
+                    2px 2px 0 #000;
+            }
+
+            /* Обводка символов для обычного текста */
+            .outline{
+                font-size: 26px;
+                color: white;
+                text-shadow:
+                    -1px -1px 0 #000,
+                    1px -1px 0 #000,
+                    -1px 1px 0 #000,
+                    1px 1px 0 #000;
+            }
+
+            /* Размеры слайдера */
+            .ui-slider {
+                height: 15px;
+                width: 200px;
+                margin-left: 5px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1 class="header_outline">Создание космического корабля</h1>
+        <table>
+            <tr>
+                <td>
+                    <h1 class="table_header_outline">Параметры космического корабля</h1>
+                    <form name="starship_form">
+                        <p><div class="outline">Имя корабля</div><input title="Имя" name="name" type="text"></p>
+                        <p><div class="outline">Описание корабля</div><input title="Описание" name="description" type="text"></p>
+                        <p><div class="outline">День создания корабля</div><input title="День создания" name="birth_date" type="text" id="datepicker" readonly="readonly"></p>
+
+                        <p>
+                            <div class="outline">Тип корабля</div>
+                            <select name="type" id="ship_type">
+                                <option>Лёгкий</option>
+                                <option selected="selected">Средний</option>
+                                <option>Тяжёлый</option>
+                            </select>
+                        </p>
+
+                        <p>
+                            <div id="accordion_wings">
+                                <h3 id="accordion_wings_1">Крылья "Русский стандарт"</h3>
+                                <div>
+                                    <p>Классические крылья подходят для всех типов кораблей.</p>
+                                </div>
+                                <h3 id="accordion_wings_2">Американский пирог</h3>
+                                <div>
+                                    <p>
+                                        Крылья стреловидной формы, больше подходят для лёгких кораблей.
+                                    </p>
+                                </div>
+                              </div>
+                        </p>
+
+                        <p>
+                            <div id="accordion_engine">
+                                <h3 id="accordion_engine_1">Двигатель "Урод"</h3>
+                                <div>
+                                    <p>Двигатель создан каким-то уродом.</p>
+                                </div>
+                                <h3 id="accordion_engine_2">Двигатель "Прокатииииииись"</h3>
+                                <div>
+                                    <p>Ходят легенды, что его создателе оседлал собственную ракету.</p>
+                                </div>
+                              </div>
+                        </p>
+
+                        <p>
+                            <div class="outline">Объём топливных баков</div>
+                            <p name="fuel" type="text" id="slider" readonly="readonly">
+                        </p>
+
+                        <input name="fuel_view" type="text" title="Объём баков" value="10" readonly="readonly">
+
+                        <p><input class="ui-button ui-widget ui-corner-all" type="button" value="Создать" onclick="send_review();"></p>
+                    </form>
+                </td>
+
+                <td>
+                    <table id="starship_view" title="Схема корабля"></table>
+                </td>
+            </tr>
+        </table>
+    </body>
+
+    <script language="JavaScript">
+        // Создание схемы корабля
+        create_starship_view();
+
+        // Инициализация объектов
+        $("#datepicker").datepicker({
+            dateFormat: "dd.mm.yy"
+        });
+
+        $("#ship_type").selectmenu();
+
+        $("#accordion_wings").accordion({
+            activate: function(event, ui) {
+                var currentHeaderID = ui.newHeader.attr("id");
+                if (currentHeaderID === "accordion_wings_1"){
+                    document.getElementById("starship_view_5").src = 'starship_parts/starship_6.png';
+                    document.getElementById("starship_view_6").src = 'starship_parts/starship_7.png';
+                    document.getElementById("starship_view_8").src = 'starship_parts/starship_9.png';
+                    document.getElementById("starship_view_9").src = 'starship_parts/starship_10.png';
+
+                    document.getElementById("starship_view_10").src = 'starship_parts/starship_11.png';
+                    document.getElementById("starship_view_11").src = 'starship_parts/starship_12.png';
+                    document.getElementById("starship_view_13").src = 'starship_parts/starship_14.png';
+                    document.getElementById("starship_view_14").src = 'starship_parts/starship_15.png';
+                }
+                else{
+                    document.getElementById("starship_view_5").src = 'starship_parts/starship_6_2.png';
+                    document.getElementById("starship_view_6").src = 'starship_parts/starship_7_2.png';
+                    document.getElementById("starship_view_8").src = 'starship_parts/starship_9_2.png';
+                    document.getElementById("starship_view_9").src = 'starship_parts/starship_10_2.png';
+
+                    document.getElementById("starship_view_10").src = 'starship_parts/starship_11_2.png';
+                    document.getElementById("starship_view_11").src = 'starship_parts/starship_12_2.png';
+                    document.getElementById("starship_view_13").src = 'starship_parts/starship_14_2.png';
+                    document.getElementById("starship_view_14").src = 'starship_parts/starship_15_2.png';
+                }
+            }
+        });
+
+        $("#accordion_wings").mouseover(function(){
+            document.getElementById("starship_view_5").style = "background-color:#F00";
+            document.getElementById("starship_view_6").style = "background-color:#F00";
+            document.getElementById("starship_view_8").style = "background-color:#F00";
+            document.getElementById("starship_view_9").style = "background-color:#F00";
+
+            document.getElementById("starship_view_10").style = "background-color:#F00";
+            document.getElementById("starship_view_11").style = "background-color:#F00";
+            document.getElementById("starship_view_13").style = "background-color:#F00";
+            document.getElementById("starship_view_14").style = "background-color:#F00";
+        });
+        $("#accordion_wings").mouseleave(function(){
+            document.getElementById("starship_view_5").style = "background-color:#FFF";
+            document.getElementById("starship_view_6").style = "background-color:#FFF";
+            document.getElementById("starship_view_8").style = "background-color:#FFF";
+            document.getElementById("starship_view_9").style = "background-color:#FFF";
+
+            document.getElementById("starship_view_10").style = "background-color:#FFF";
+            document.getElementById("starship_view_11").style = "background-color:#FFF";
+            document.getElementById("starship_view_13").style = "background-color:#FFF";
+            document.getElementById("starship_view_14").style = "background-color:#FFF";
+        });
+
+        $("#accordion_engine").accordion({
+            activate: function(event, ui) {
+                var currentHeaderID = ui.newHeader.attr("id");
+                if (currentHeaderID === "accordion_engine_1"){
+                    document.getElementById("starship_view_17").src = 'starship_parts/starship_18.png';
+                }
+                else{
+                    document.getElementById("starship_view_17").src = 'starship_parts/starship_18_2.png';
+                }
+            }
+        });
+
+        $("#accordion_engine").mouseover(function(){
+            document.getElementById("starship_view_17").style = "background-color:#F00";
+        });
+        $("#accordion_engine").mouseleave(function(){
+            document.getElementById("starship_view_17").style = "background-color:#FFF";
+        });
+
+        $("#slider").slider({
+            step: 5,
+            min: 10,
+            max: 40,
+            slide: function(event, ui) {
+                document.starship_form.fuel_view.value = ui.value;
+            },
+        });
+
+        $("#slider").mouseover(function(){
+            document.getElementById("starship_view_12").style = "background-color:#F00";
+        });
+
+        $("#slider").mouseleave(function(){
+            document.getElementById("starship_view_12").style = "background-color:#FFF";
+        });
+
+        $(document).tooltip();
+
+        function create_starship_view(){
+            var starship_view = document.getElementById("starship_view");
+
+            var tbdy = document.createElement('tbody');
+
+            for (var i=0;i<4;i++){
+                var tr = document.createElement('tr');
+
+                for (var d=0;d<5;d++){
+                    var td = document.createElement('td');
+
+                    td.style = "background-color:#FFF";
+
+                    var inner ="<img id='starship_view_" + String(i*5 + d) + "'"
+                     + "src='starship_parts/starship_"
+                     +  String(i*5 + d + 1) + ".png'>";
+
+                    td.innerHTML = inner;
+
+                    tr.appendChild(td);
+                }
+
+                tbdy.appendChild(tr);
+            }
+
+            starship_view.appendChild(tbdy);
+        }
+
+        function length(str){
+            var strIter = str[Symbol.iterator]();
+            let str_lenght = 0;
+            for (let ch of strIter){str_lenght++;}
+            return str_lenght;
+        }
+    </script>
+</html>
