@@ -4,7 +4,6 @@
         <link rel="stylesheet" href="../../jquery-ui-1.12.1.custom/jquery-ui.css">
         <script src="../../jquery-ui-1.12.1.custom/external/jquery/jquery.js"></script>
         <script src="../../jquery-ui-1.12.1.custom/jquery-ui.js"></script>
-
         <style type="text/css">
             /* Обои */
             body {
@@ -12,7 +11,6 @@
                 background-position: left bottom;
                 background-repeat: repeat;
             }
-
             /* Обводка символов в заголовке */
             .header_outline{
                 font-size: 56px;
@@ -23,7 +21,6 @@
                     -2px 2px 0 #000,
                     2px 2px 0 #000;
             }
-
             .table_header_outline{
                 font-size: 46px;
                 color: white;
@@ -33,7 +30,6 @@
                     -2px 2px 0 #000,
                     2px 2px 0 #000;
             }
-
             /* Обводка символов для обычного текста */
             .outline{
                 font-size: 26px;
@@ -44,7 +40,6 @@
                     -1px 1px 0 #000,
                     1px 1px 0 #000;
             }
-
             /* Размеры слайдера */
             .ui-slider {
                 height: 15px;
@@ -61,26 +56,28 @@
                 <td>
                     <h1 class="table_header_outline">Параметры космического корабля</h1>
                     <form name="starship_form">
-                        <p><div class="outline">Имя корабля</div><input title="Имя" name="name" type="text"></p>
-                        <p><div class="outline">Описание корабля</div><input title="Описание" name="description" type="text"></p>
-                        <p><div class="outline">День создания корабля</div><input title="День создания" name="birth_date" type="text" id="datepicker" readonly="readonly"></p>
-
+                        <p><div class="outline">Имя корабля</div><input id = "ship_name" title="Имя" name="name" type="text"></p>
+                        <p><div class="outline">Описание корабля</div><input id = "ship_description" title="Описание" name="description" type="text"></p>
+                        <p>
+                            <div class="outline">День создания корабля</div>
+                            <input id = "ship_birth" title="День создания" name="birth_date" type="text" readonly="readonly">
+                            <input id = "altFormatDate" type="hidden" readonly="readonly" >
+                        </p>
                         <p>
                             <div class="outline">Тип корабля</div>
                             <select name="type" id="ship_type">
-                                <option>Лёгкий</option>
-                                <option selected="selected">Средний</option>
-                                <option>Тяжёлый</option>
+                                <option value = "0">Лёгкий</option>
+                                <option value = "1" selected="selected">Средний</option>
+                                <option value = "2">Тяжёлый</option>
                             </select>
                         </p>
-
                         <p>
                             <div id="accordion_wings">
                                 <h3 id="accordion_wings_1">Крылья "Русский стандарт"</h3>
                                 <div>
                                     <p>Классические крылья подходят для всех типов кораблей.</p>
                                 </div>
-                                <h3 id="accordion_wings_2">Американский пирог</h3>
+                                <h3 id="accordion_wings_2">Крылья "Американский пирог"</h3>
                                 <div>
                                     <p>
                                         Крылья стреловидной формы, больше подходят для лёгких кораблей.
@@ -88,7 +85,6 @@
                                 </div>
                               </div>
                         </p>
-
                         <p>
                             <div id="accordion_engine">
                                 <h3 id="accordion_engine_1">Двигатель "Урод"</h3>
@@ -101,15 +97,19 @@
                                 </div>
                               </div>
                         </p>
-
                         <p>
                             <div class="outline">Объём топливных баков</div>
                             <p name="fuel" type="text" id="slider" readonly="readonly">
                         </p>
+                        <input id = "fuel_view" name="fuel_view" type="text" title="Объём баков" value="10" readonly="readonly">
 
-                        <input name="fuel_view" type="text" title="Объём баков" value="10" readonly="readonly">
+                        <p>
+                            <div class="outline">Стоимость корабля</div>
+                            <input id = "price" type="text" title="Стоимость корабля" value="3000" readonly="readonly">
+                        </p>
+                        
 
-                        <p><input class="ui-button ui-widget ui-corner-all" type="button" value="Создать" onclick="send_review();"></p>
+                        <p><input class="ui-button ui-widget ui-corner-all" type="button" value="Создать" onclick="create_starship();"></p>
                     </form>
                 </td>
 
@@ -118,15 +118,26 @@
                 </td>
             </tr>
         </table>
+        <div id="ok_dialog" title="Всё ок!">
+            <p>Супер-Мега-Классно-Невероятный космический корабль добавлен.</p>
+        </div>
+        <div id="error_dialog" title="Ошибка!">
+            <p>Произошла ошибка.</p>
+        </div>
     </body>
 
     <script language="JavaScript">
+        var engine_chosen = 0;
+        var wings_chosen = 0;
+
         // Создание схемы корабля
         create_starship_view();
 
         // Инициализация объектов
-        $("#datepicker").datepicker({
-            dateFormat: "dd.mm.yy"
+        $("#ship_birth").datepicker({
+            dateFormat: "dd.mm.yy",
+            altFormat: "yy-mm-dd",
+            altField: "#altFormatDate",
         });
 
         $("#ship_type").selectmenu();
@@ -135,6 +146,7 @@
             activate: function(event, ui) {
                 var currentHeaderID = ui.newHeader.attr("id");
                 if (currentHeaderID === "accordion_wings_1"){
+                    wings_chosen = 0;
                     document.getElementById("starship_view_5").src = 'starship_parts/starship_6.png';
                     document.getElementById("starship_view_6").src = 'starship_parts/starship_7.png';
                     document.getElementById("starship_view_8").src = 'starship_parts/starship_9.png';
@@ -144,8 +156,11 @@
                     document.getElementById("starship_view_11").src = 'starship_parts/starship_12.png';
                     document.getElementById("starship_view_13").src = 'starship_parts/starship_14.png';
                     document.getElementById("starship_view_14").src = 'starship_parts/starship_15.png';
+
+                    add_price(-1000);
                 }
                 else{
+                    wings_chosen = 1;
                     document.getElementById("starship_view_5").src = 'starship_parts/starship_6_2.png';
                     document.getElementById("starship_view_6").src = 'starship_parts/starship_7_2.png';
                     document.getElementById("starship_view_8").src = 'starship_parts/starship_9_2.png';
@@ -155,6 +170,8 @@
                     document.getElementById("starship_view_11").src = 'starship_parts/starship_12_2.png';
                     document.getElementById("starship_view_13").src = 'starship_parts/starship_14_2.png';
                     document.getElementById("starship_view_14").src = 'starship_parts/starship_15_2.png';
+
+                    add_price(1000);
                 }
             }
         });
@@ -186,10 +203,14 @@
             activate: function(event, ui) {
                 var currentHeaderID = ui.newHeader.attr("id");
                 if (currentHeaderID === "accordion_engine_1"){
+                    engine_chosen = 0;
                     document.getElementById("starship_view_17").src = 'starship_parts/starship_18.png';
+                    add_price(-2000);
                 }
                 else{
+                    engine_chosen = 1;
                     document.getElementById("starship_view_17").src = 'starship_parts/starship_18_2.png';
+                    add_price(2000);
                 }
             }
         });
@@ -201,12 +222,19 @@
             document.getElementById("starship_view_17").style = "background-color:#FFF";
         });
 
+        var last_slider_value = 10;
         $("#slider").slider({
             step: 5,
             min: 10,
             max: 40,
             slide: function(event, ui) {
                 document.starship_form.fuel_view.value = ui.value;
+
+                var value = (ui.value - last_slider_value) * 40;
+
+                last_slider_value = ui.value;
+
+                add_price(value);
             },
         });
 
@@ -216,6 +244,23 @@
 
         $("#slider").mouseleave(function(){
             document.getElementById("starship_view_12").style = "background-color:#FFF";
+        });
+
+        $("#ok_dialog").dialog({
+            autoOpen: false,
+            modal: true,
+            buttons: {
+                "Вернуться назад": function() {
+                    window.location.href = 'index.html';
+                    $(this).dialog("close");
+                },
+                "Окей": function() {
+                    $(this).dialog("close");
+                }
+            }
+        });
+        $("#error_dialog").dialog({
+            autoOpen: false,
         });
 
         $(document).tooltip();
@@ -246,6 +291,55 @@
             }
 
             starship_view.appendChild(tbdy);
+        }
+
+        function create_starship(){
+            var ship_name = document.getElementById("ship_name").value;
+            var ship_description = document.getElementById("ship_description").value;
+            var ship_birth = document.getElementById("altFormatDate").value;
+
+            if (length(ship_name)==0||
+                length(ship_description)==0||
+                length(ship_birth)==0){
+                $("#error_dialog").dialog("open");
+                return;
+            }
+
+            var ship_type = document.getElementById("ship_type").value;
+
+            var fuel = document.getElementById("fuel_view").value;
+
+            var price = document.getElementById("price").value;
+
+            var url = 
+                "add_starship.php?name=" + ship_name +
+                "&description=" + ship_description +
+                "&birth=" + ship_birth +
+                "&type=" + ship_type +
+                "&wings=" + wings_chosen +
+                "&engine=" + engine_chosen +
+                "&fuel=" + fuel +
+                "&price="+price;
+
+            $.ajax({
+                type: "GET",
+                url: url,
+                dataType: "html",
+                success: function(data){
+                    if (data=="1"){
+                        $("#ok_dialog").dialog("open");
+                    }
+                    else{
+                        $("#error_dialog").dialog("open");
+                    }
+                }
+            });
+        }
+
+        function add_price(addition){
+            var value = parseInt(document.getElementById("price").value,"10");
+            value+=addition;
+            document.getElementById("price").value = value; 
         }
 
         function length(str){

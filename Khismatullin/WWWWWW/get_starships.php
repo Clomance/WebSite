@@ -4,31 +4,79 @@
         echo "Не удалось подключиться к БД";
     }
 
-    $loaded = $_GET['loaded'];
-    $need_to_load = $_GET['need_to_load'];
+    $result = $mysqli->query("SELECT  name, description, creation_date, type, wings, engine, fuel, price FROM starships");
 
-    $result = $mysqli->query(
-        "SELECT  id, header, description, image_reference
-        FROM news ORDER BY id DESC LIMIT $loaded, $need_to_load"
-    );
+    $counter = 0;
 
     if ($result){
         while ($row = $result->fetch_array()){
-            $id = $row['id'];
-            $header = $row['header'];
-            $description = $row['description'];
-            $image_reference = $row['image_reference'];
+            $counter++;
 
-            echo "<p>";
-            echo "<h1>$header</h1>";
-            echo "<img width='250px' height='250px' class='leftimg' src='$image_reference'>";
-            echo $description;
-            echo "</img>";
-            echo "<div style='clear:left'></div>";
-            echo "<section id='comments_$id'></section>";
-            echo "<section id='add_comments_section_$id'></section>";
-            echo "<p><input id='comments_button_$id' type='button' value='Открыть комментарии' onclick='upload_comments($id);'></p>";
-            echo "</p>";
+            $name = $row['name'];
+            $description = $row['description'];
+            $birth = $row['creation_date'];
+            $type = $row['type'];
+            $wings = $row['wings'];
+            $engine = $row['engine'];
+            $fuel = $row['fuel'];
+            $price = $row['price'];
+
+            echo "<section style = background-color:#222>";
+            echo "<h2> Космитеческий корабль \"$name\"</h2>";
+
+            // echo "<tbody>";
+            // for ($i=0;$i<4;$i++){
+            //     echo "<tr>";
+            //     for ($d=0;$d<5;$d++){
+            //         echo "<td style = background-color:#FFF>";
+            //         $cid = $i*5+$d;
+            //         $cid2 = $cid+1;
+            //         echo "<img id='starship_view_$cid' src='starship_parts/starship_$cid2.png'>";
+            //         echo "</td>";
+            //     }
+            //     echo "</tr>";
+            // }
+            // echo "</tbody>";
+
+            echo "<div>Описание: $description</div>";
+
+            $date = new DateTime($birth);
+            $birth = $date->format('d.m.y');
+            echo "<div>Дата создания: $birth</div>";
+
+            if ($type==0){
+                echo "<div>Тип: Лёгкий</div>";
+            }
+            else if ($type==1){
+                echo "<div>Тип: Средний</div>";
+            }
+            else{
+                echo "<div>Тип: Тяжёлый</div>";
+            }
+
+            if ($wings==0){
+                echo "<div>Крылья \"Русский стандарт\"</div>";
+            }
+            else{
+                echo "<div>Крылья \"Американский пирог\"</div>";
+            }
+
+            if ($engine==0){
+                echo "<div>Двигатель \"Урод\"</div>";
+            }
+            else{
+                echo "<div>Двигатель \"Прокатиииииись\"</div>";
+            }
+            
+            echo "<div>Уровень топлива: $fuel</div>";
+
+            echo "<div>Стоимость: $price</div>";
+
+            echo "</section>";
+        }
+
+        if ($counter==0){
+            echo "Пока здесь нет космических кораблей";
         }
     }
 ?>
