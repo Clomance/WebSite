@@ -1,0 +1,222 @@
+<html>
+    <title>Змейка</title>
+    <head>
+        <meta charset = "UTF-8">
+
+        <link rel="stylesheet" href="../../jquery-ui-1.12.1.custom/jquery-ui.min.css">
+        <script src="../../jquery-ui-1.12.1.custom/external/jquery/jquery.js"></script>
+        <script src="../../jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+
+        <style type="text/css">
+            th, td {
+                border: 1px solid black;
+                width: 50px;
+                height: 50px;
+                overflow: hidden;
+                background-color:#FFF;
+            }
+        </style>
+    </head>
+    <body>
+       <h1>Змейка</h1>
+
+        <game_field id="game_field"></game_field>
+
+        <script language="JavaScript">
+            class Point{
+                constructor(x, y){
+                    this.x = x;
+                    this.y = y;
+                }
+
+                copy(){
+                    var point = new Point(this.x, this.y);
+                    return point;
+                }
+
+                shift(dx, dy){
+                    this.x += dx;
+                    this.y += dy;
+                }
+
+                shifted_copy(dx, dy){
+                    var point = new Point(this.x, this.y);
+                    point.shift(dx, dy);
+                    return point;
+                }
+
+                move(point){
+                    this.x = point.x;
+                    this.y = point.y;
+                }
+
+                draw(part){
+                    var id = this.x + this.y * 15;
+                    var game_field_cell = document.getElementById("game_field_cell_" + id);
+                    game_field_cell.innerHTML = part;
+                }
+
+                field_id(){
+                    return this.x + this.y * 15;
+                }
+            }
+
+            var intervalId = 0;
+            var food = [new Point(5, 5), new Point(10, 11)];
+
+            var head_pos = new Point(3, 0);
+            var neck_pos = new Point(2, 0);
+            var body = [new Point(1, 0)];
+            var tail_pos = new Point(0, 0);
+
+            // 0 - up, 1 - left, 2 - down, 3 - right
+            var direction = 3;
+
+            create_game_field();
+            create_update_event();
+
+            function clear_field(){
+                for (var i=0;i<15;i++){
+                    for (var d=0;d<15;d++){
+                        var id = d + i * 15;
+                        var game_field_cell = document.getElementById("game_field_cell_" + id);
+                        game_field_cell.innerHTML = "";
+                        game_field_cell.style = "font-size:40px";
+                    }
+                }
+
+                food.forEach(function(v, i, a){
+                    v.draw("Еда");
+                    var game_field_cell = document.getElementById("game_field_cell_" + v.field_id());
+                    game_field_cell.style = "font-size:20px";
+                });
+            }
+
+            function move(){
+                var next_head_pos = head_pos.copy();
+                switch (direction){
+                    case 0: // up
+                        next_head_pos.shift(0, -1);
+                        break;
+                    case 1: // left
+                        next_head_pos.shift(-1, 0);
+                        break;
+                    case 2: // down
+                        next_head_pos.shift(0, 1);
+                        break;
+                    case 3: // right
+                        next_head_pos.shift(1, 0);
+                        break;
+                }
+                var game_field_cell = document.getElementById("game_field_cell_" + next_head_pos.field_id());
+                if (game_field_cell.innerHTML=="Еда"){
+                    eat_food(next_head_pos);
+                    body.unshift(neck_pos.copy());
+                }
+                else{
+                    tail_pos.move(body[body.length-1]);
+
+                    for (var i = body.length-1; i>0; i--){
+                        body[i].move(body[i-1]);
+                    }
+                    body[0].move(neck_pos);
+                }
+
+                neck_pos.move(head_pos);
+
+                switch (direction){
+                    case 0: // up
+                        head_pos.shift(0, -1);
+                        break;
+                    case 1: // left
+                        head_pos.shift(-1, 0);
+                        break;
+                    case 2: // down
+                        head_pos.shift(0, 1);
+                        break;
+                    case 3: // right
+                        head_pos.shift(1, 0);
+                        break;
+                }
+            }
+
+            function create_game_field(){
+                var game_field = document.getElementById("game_field");
+
+                var tbdy = document.createElement('tbody');
+
+                for (var i=0;i<15;i++){
+                    var tr = document.createElement('tr');
+
+                    for (var d=0;d<15;d++){
+                        var td = document.createElement('td');
+
+                        td.id = "game_field_cell_" + (i*15 + d);
+                        td.style = "font-size:40px;";
+                        td.align = "center";
+
+                        tr.appendChild(td);
+                    }
+
+                    tbdy.appendChild(tr);
+                }
+
+                game_field.appendChild(tbdy);
+            }
+
+            function create_update_event(){
+                intervalId = setInterval(function(){
+                        move();
+                        clear_field();
+                        head_pos.draw("З");
+                        neck_pos.draw("м");
+                        body.forEach(function(v,i,a){
+                            v.draw("е");
+                        });
+                        tail_pos.draw("я");
+                    },
+                    1000
+                );
+            }
+
+            document.onkeydown = function(e){
+                var window_width = window.innerWidth, window_height = window.innerHeight;
+
+                switch(e.which) {
+                    case 37: // left
+                        direction = 1;
+                    break;
+
+                    case 38: // up
+                        direction = 0;
+                    break;
+
+                    case 39: // right
+                        direction = 3;
+                    break;
+
+                    case 40: // down
+                        direction = 2;
+                    break;
+
+                    default: return; // exit this handler for other keys
+                }
+
+                e.preventDefault();
+            }
+
+            function eat_food(point){
+                for (var i=0; i < food.length; i++){
+                    if (point.x == food[i].x || point.y == food[i].y){
+                        food.splice(i, 1);
+                    }
+                }
+            }
+
+            function stop_game(){
+                clearInterval(intervalId);
+            }
+        </script>
+
+    </body>
+</html>
