@@ -24,7 +24,7 @@
 
         <div id="start_dialog" title="Змейка">
             <p>Управление: стрелочки клавиатуры</p>
-            <p>Введите количество еды на поле</p>
+            <p>Введите количество еды на поле (от 1 до 100)</p>
             <p><input id="food_amount" type="text"></p>
         </div>
 
@@ -65,6 +65,7 @@
                     var id = this.x + this.y * field_width;
                     var game_field_cell = document.getElementById("game_field_cell_" + id);
                     game_field_cell.innerHTML = part;
+                    // game_field_cell.style = "font-size:40px";
                 }
 
                 field_id(){
@@ -93,9 +94,25 @@
                 buttons: {
                     "Старт": function() {
                         var food_amount = parseInt(document.getElementById("food_amount").value, "10");
-                        if (isNaN(food_amount) || food_amount<1){
+                        if (isNaN(food_amount) || food_amount<1 ){ // || food_amount>100
                             return;
                         }
+
+                        field_width = 15;
+                        field_height = 15;
+
+                        intervalId = 0;
+                        food = [];
+                        food_eaten = 0;
+
+                        head_pos = new Point(3, 0);
+                        neck_pos = new Point(2, 0);
+                        body = [new Point(1, 0)];
+                        tail_pos = new Point(0, 0);
+
+                        // 0 - up, 1 - left, 2 - down, 3 - right
+                        direction = 3;
+
                         $(this).dialog("close");
                         create_game_field();
                         set_food(food_amount);
@@ -133,12 +150,29 @@
             }
 
             function set_food(amount){
-                for (var i = 0; i < amount; i++){
+                label1:for (var i = 0; i < amount; ){
                     var x = Math.floor(Math.random() * field_width);
                     var y = Math.floor(Math.random() * field_height);
 
+                    if (
+                        x == head_pos.x+1 && y == head_pos.y ||
+                        x == head_pos.x && y == head_pos.y ||
+                        x == neck_pos.x && y == neck_pos.y ||
+                        x == body[0].x && y == body[0].y ||
+                        x == tail_pos.x && y == tail_pos.y
+                    ){
+                        continue label1;
+                    }
+
+                    for (var f = 0; f < food.length; f++){
+                        if (x == food[f].x && y == food[f].y){
+                            continue label1;
+                        }
+                    }
+
                     var point = new Point(x, y);
                     food.push(point);
+                    i++;
                 }
             }
 
@@ -182,8 +216,6 @@
                         }
                         break;
                 }
-
-
 
                 var game_field_cell = document.getElementById("game_field_cell_" + next_head_pos.field_id());
                 if (game_field_cell.innerHTML=="Еда"){
@@ -284,7 +316,7 @@
 
             function eat_food(point){
                 for (var i=0; i < food.length; i++){
-                    if (point.x == food[i].x || point.y == food[i].y){
+                    if (point.x == food[i].x && point.y == food[i].y){
                         food.splice(i, 1);
                         food_eaten++;
                         if (food.length==0){
