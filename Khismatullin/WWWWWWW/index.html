@@ -22,6 +22,17 @@
 
         <game_field id="game_field"></game_field>
 
+        <div id="start_dialog" title="Змейка">
+            <p>Управление: стрелочки клавиатуры</p>
+            <p>Введите количество еды на поле</p>
+            <p><input id="food_amount" type="text"></p>
+        </div>
+
+        <div id="end_dialog" title="Змейка">
+            <p>Игра окончена</p>
+            <p id="score">Ваш счёт: </p>
+        </div>
+
         <script language="JavaScript">
             class Point{
                 constructor(x, y){
@@ -51,7 +62,7 @@
                 }
 
                 draw(part){
-                    var id = this.x + this.y * 15;
+                    var id = this.x + this.y * field_width;
                     var game_field_cell = document.getElementById("game_field_cell_" + id);
                     game_field_cell.innerHTML = part;
                 }
@@ -61,8 +72,12 @@
                 }
             }
 
+            var field_width = 15;
+            var field_height = 15;
+
             var intervalId = 0;
-            var food = [new Point(5, 5), new Point(10, 11)];
+            var food = [];
+            var food_eaten = 0;
 
             var head_pos = new Point(3, 0);
             var neck_pos = new Point(2, 0);
@@ -72,13 +87,38 @@
             // 0 - up, 1 - left, 2 - down, 3 - right
             var direction = 3;
 
-            create_game_field();
-            create_update_event();
+            $("#start_dialog").dialog({
+                autoOpen: true,
+                modal: true,
+                buttons: {
+                    "Старт": function() {
+                        var food_amount = parseInt(document.getElementById("food_amount").value, "10");
+                        if (isNaN(food_amount) || food_amount<1){
+                            return;
+                        }
+                        $(this).dialog("close");
+                        create_game_field();
+                        set_food(food_amount);
+                        create_update_event();
+                    }
+                }
+            });
+
+            $("#end_dialog").dialog({
+                autoOpen: false,
+                modal: true,
+                buttons: {
+                    "Начать сначала": function() {
+                        $(this).dialog("close");
+                        document.location.reload();
+                    }
+                }
+            });
 
             function clear_field(){
-                for (var i=0;i<15;i++){
-                    for (var d=0;d<15;d++){
-                        var id = d + i * 15;
+                for (var i=0;i<field_height;i++){
+                    for (var d=0;d<field_width;d++){
+                        var id = d + i * field_width;
                         var game_field_cell = document.getElementById("game_field_cell_" + id);
                         game_field_cell.innerHTML = "";
                         game_field_cell.style = "font-size:40px";
@@ -92,22 +132,59 @@
                 });
             }
 
+            function set_food(amount){
+                for (var i = 0; i < amount; i++){
+                    var x = Math.floor(Math.random() * field_width);
+                    var y = Math.floor(Math.random() * field_height);
+
+                    var point = new Point(x, y);
+                    food.push(point);
+                }
+            }
+
+            function end_game(){
+                clearInterval(intervalId);
+                var score = document.getElementById("score");
+                score.innerHTML += food_eaten;
+                $("#end_dialog").dialog("open");
+            }
+
             function move(){
                 var next_head_pos = head_pos.copy();
                 switch (direction){
                     case 0: // up
                         next_head_pos.shift(0, -1);
+                        if (next_head_pos.y==-1){
+                            end_game();
+                            return;
+                        }
+
                         break;
                     case 1: // left
                         next_head_pos.shift(-1, 0);
+                        if (next_head_pos.x==-1){
+                            end_game();
+                            return;
+                        }
                         break;
                     case 2: // down
                         next_head_pos.shift(0, 1);
+                        if (next_head_pos.y==field_height){
+                            end_game();
+                            return;
+                        }
                         break;
                     case 3: // right
                         next_head_pos.shift(1, 0);
+                        if (next_head_pos.x==field_width){
+                            end_game();
+                            return;
+                        }
                         break;
                 }
+
+
+
                 var game_field_cell = document.getElementById("game_field_cell_" + next_head_pos.field_id());
                 if (game_field_cell.innerHTML=="Еда"){
                     eat_food(next_head_pos);
@@ -145,13 +222,13 @@
 
                 var tbdy = document.createElement('tbody');
 
-                for (var i=0;i<15;i++){
+                for (var i=0;i<field_height;i++){
                     var tr = document.createElement('tr');
 
-                    for (var d=0;d<15;d++){
+                    for (var d=0;d<field_width;d++){
                         var td = document.createElement('td');
 
-                        td.id = "game_field_cell_" + (i*15 + d);
+                        td.id = "game_field_cell_" + (i*field_width + d);
                         td.style = "font-size:40px;";
                         td.align = "center";
 
@@ -209,14 +286,14 @@
                 for (var i=0; i < food.length; i++){
                     if (point.x == food[i].x || point.y == food[i].y){
                         food.splice(i, 1);
+                        food_eaten++;
+                        if (food.length==0){
+                            end_game();
+                        }
+                        return;
                     }
                 }
             }
-
-            function stop_game(){
-                clearInterval(intervalId);
-            }
         </script>
-
     </body>
 </html>
