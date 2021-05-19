@@ -65,7 +65,7 @@
                     var id = this.x + this.y * field_width;
                     var game_field_cell = document.getElementById("game_field_cell_" + id);
                     game_field_cell.innerHTML = part;
-                    // game_field_cell.style = "font-size:40px";
+                    game_field_cell.style = "font-size:40px";
                 }
 
                 field_id(){
@@ -94,7 +94,7 @@
                 buttons: {
                     "Старт": function() {
                         var food_amount = parseInt(document.getElementById("food_amount").value, "10");
-                        if (isNaN(food_amount) || food_amount<1 ){ // || food_amount>100
+                        if (isNaN(food_amount) || food_amount<1 || food_amount>100){
                             return;
                         }
 
@@ -138,7 +138,6 @@
                         var id = d + i * field_width;
                         var game_field_cell = document.getElementById("game_field_cell_" + id);
                         game_field_cell.innerHTML = "";
-                        game_field_cell.style = "font-size:40px";
                     }
                 }
 
